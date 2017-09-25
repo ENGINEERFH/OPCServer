@@ -20,6 +20,4 @@
    6. 将OPC动态链接库WtOPCSvr.dll和上面生成的STOPCServer.dll也一起拷贝到SYSTEM32目录下
 + # 开发工具
   1. 在Java端所使用的开发工具为MyEclipse
-MyEclipse 是一个非常出色的用于开发Java, J2EE的 Eclipse 插件集合，MyEclipse的功能十分丰富，支持也非常广泛，特别是对各种开源产品的支持非常出色。MyEclipse可以支持Java Servlet，AJAX，JSP，JSF，Struts，Spring，Hibernate，EJB3，JDBC数据库链接工具等多项功能。可以说MyEclipse是收纳了目前所有主要开源产品的eclipse开发工具。
   2. 在本地C++端所使用的开发工具为Visual Studio 2015
-Visual Studio 是一套基于组件的软件开发工具和其他技术，可用于构建功能强大、性能出众的应用程序。作为一个功能强大的开发工具，其具有很多优点，例如更优的代码编辑器、能够调试Lambdas表达式、更优的代码智能提示、强大的诊断工具和完全支持C++11标准等等。

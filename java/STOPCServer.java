@@ -8,176 +8,176 @@ public class STOPCServer {
         System.loadLibrary("STOPCServer");
 	}
 	
-	//************************¶Ô·şÎñÆ÷µÄ¸÷ÖÖ²Ù×÷**************************//
-	//ÏÔÊ¾DLLµÄ°æ±¾
+	//************************å¯¹æœåŠ¡å™¨çš„å„ç§æ“ä½œ**************************//
+	//æ˜¾ç¤ºDLLçš„ç‰ˆæœ¬
 	private native String OPCsvrRevision();    
-	//×¢²á·şÎñÆ÷
+	//æ³¨å†ŒæœåŠ¡å™¨
 	private native boolean RegistryServer(String svrname,String svrdescr);  
-	//Ğ¶ÔØ·şÎñÆ÷
+	//å¸è½½æœåŠ¡å™¨
 	private native boolean UnregisterServer(String svrname);          
-	//³õÊ¼»¯·şÎñÆ÷      
+	//åˆå§‹åŒ–æœåŠ¡å™¨      
 	private native boolean InitServer(int serverrate);  
-	//È¥³ı·şÎñÆ÷µÄ³õÊ¼»¯
+	//å»é™¤æœåŠ¡å™¨çš„åˆå§‹åŒ–
 	private native boolean UninitServer();
-	//¸ü¸Ä·şÎñÆ÷µÄ¸üĞÂËÙÂÊ
+	//æ›´æ”¹æœåŠ¡å™¨çš„æ›´æ–°é€Ÿç‡
 	private native boolean ResetServerRate(int serverrate);
-	//·µ»ØÁ¬½Óµ½·şÎñÆ÷ÉÏµÄ¿Í»§¶ËÊıÁ¿
+	//è¿”å›è¿æ¥åˆ°æœåŠ¡å™¨ä¸Šçš„å®¢æˆ·ç«¯æ•°é‡
 	private native int NumbrClientConnections();
-	//Ç¿ÖÆ¶Ï¿ªËùÓĞ¿Í»§¶ËµÄÁ¬½Ó
+	//å¼ºåˆ¶æ–­å¼€æ‰€æœ‰å®¢æˆ·ç«¯çš„è¿æ¥
 	private native void RequestDisconnect();
-	//Ç¿ÖÆ·şÎñÆ÷Ïò¿Í»§¶Ë·¢³öÊı¾İ¸üĞÂ
+	//å¼ºåˆ¶æœåŠ¡å™¨å‘å®¢æˆ·ç«¯å‘å‡ºæ•°æ®æ›´æ–°
 	private native boolean RefreshAllClients();
-	//*********************************¶ÔTagµÄ¸÷ÖÖ²Ù×÷**********************//
-	//ÉèÖÃtagÃüÃû¿Õ¼ä·Ö²¼µÄ±êÖ¾£¬Ä¬ÈÏÎª"."
+	//*********************************å¯¹Tagçš„å„ç§æ“ä½œ**********************//
+	//è®¾ç½®tagå‘½åç©ºé—´åˆ†å¸ƒçš„æ ‡å¿—ï¼Œé»˜è®¤ä¸º"."
 	private native char SetTagNameQualifier(char qualifier);
-	//ÉèÖÃtagÊôĞÔµÄÏêÏ¸ĞÅÏ¢
+	//è®¾ç½®tagå±æ€§çš„è¯¦ç»†ä¿¡æ¯
 	private native boolean SetTagProperties(long handle,long propertyid,String property,String property_value);
-	//É¾³ıTag
+	//åˆ é™¤Tag
 	private native boolean DeleteTag(long handle);                             
-	//´´½¨Tag
+	//åˆ›å»ºTag
 	private native long AddTag(String name,String value,String value_type,boolean iswritable);
-	//¸üĞÂTag
+	//æ›´æ–°Tag
 	private native boolean UpdateTag(long handle, String value,String value_type);
-	//¸üĞÂTag by name
+	//æ›´æ–°Tag by name
 	private native boolean UpdateTagByName(String name, String value,String value_type);
-	//¶ÁÈ¡Tag
+	//è¯»å–Tag
 	private native String ReadTag(long handle);
-	//ÕûÌå´´½¨Tag
+	//æ•´ä½“åˆ›å»ºTag
 	private native long AllAddTag(String name,String property,String property_value,String value,String value_type,long readaccesslevel,long writeaccesslevel,float[] limits,long[] severity,boolean[] enabled);  
-	//ÕûÌå¸üĞÂTag
+	//æ•´ä½“æ›´æ–°Tag
 	private native boolean AllUpdateTag(long handle,String property,String property_value,String value,String value_type,float[] limits,long[] severity,boolean[] enabled);
-	//¿ªÆôÅúÁ¿¸üĞÂTag
+	//å¼€å¯æ‰¹é‡æ›´æ–°Tag
 	private native boolean StartUpdateTags();
-	//ÅúÁ¿¸üĞÂTag
+	//æ‰¹é‡æ›´æ–°Tag
 	private native boolean UpdateTagToList(long handle,String value,String value_type) ;
-	//¹Ø±ÕÅúÁ¿¸üĞÂTag
+	//å…³é—­æ‰¹é‡æ›´æ–°Tag
 	private native boolean EndUpdateTags();
-	//ÉèÖÃTagµÄ±¨¾¯ÏŞÖµ
+	//è®¾ç½®Tagçš„æŠ¥è­¦é™å€¼
 	private native boolean SetItemLevelAlarm(long handle,int levelid ,float limits,long severity,boolean enabled);
-	//¶ÁÈ¡tagµÄ±¨¾¯ÏŞÖµ
+	//è¯»å–tagçš„æŠ¥è­¦é™å€¼
 	private native String GetItemLevelAlarm(long handle,int levelid);
-	//¿ªÆô»ò¹Ø±Õtag¶Ô¿Í»§¶ËµÄ¸üĞÂ
+	//å¼€å¯æˆ–å…³é—­tagå¯¹å®¢æˆ·ç«¯çš„æ›´æ–°
 	private native boolean SuspendTagUpdates(long handle,boolean onoff);
 	
 	
 	//*****************************************************************************************//
-	//******************************Íâ²¿ÀàÄÜµ÷ÓÃµÄ·½·¨********************************************//`
+	//******************************å¤–éƒ¨ç±»èƒ½è°ƒç”¨çš„æ–¹æ³•********************************************//`
 	//*****************************************************************************************//
 	/**
-	 * ÏÔÊ¾DLLµÄ°æ±¾
+	 * æ˜¾ç¤ºDLLçš„ç‰ˆæœ¬
 	 * 
-	 * @return ·µ»Ø"DLL Rev = 932"
+	 * @return è¿”å›"DLL Rev = 932"
 	 */
 	public String serverRevision(){                                        
 		return this.OPCsvrRevision();
 	}
 	
 	/**
-	 * ×¢²á·şÎñÆ÷
+	 * æ³¨å†ŒæœåŠ¡å™¨
 	 * 
-	 * @param svrname ·şÎñÆ÷µÄÃû×Ö
-	 * @param svrdescr ¶Ô·şÎñÆ÷µÄÃèÊö
-	 * @return ³É¹¦ = true,Ê§°Ü = false
+	 * @param svrname æœåŠ¡å™¨çš„åå­—
+	 * @param svrdescr å¯¹æœåŠ¡å™¨çš„æè¿°
+	 * @return æˆåŠŸ = true,å¤±è´¥ = false
 	 */
 	public boolean registryServer(String svrname,String svrdescr){
 		return this.RegistryServer(svrname, svrdescr);
 	}
 	
 	/**
-	 * Ğ¶ÔØ·şÎñÆ÷
+	 * å¸è½½æœåŠ¡å™¨
 	 * 
-	 * @param svrname ĞèÒªĞ¶ÔØµÄ·şÎñÆ÷Ãû
-	 * @return ³É¹¦ = true,Ê§°Ü = false
+	 * @param svrname éœ€è¦å¸è½½çš„æœåŠ¡å™¨å
+	 * @return æˆåŠŸ = true,å¤±è´¥ = false
 	 */
 	public boolean unregisterServer(String svrname){
 		return this.UnregisterServer(svrname);
 	}
 
 	/**
-	 * ³õÊ¼»¯·şÎñÆ÷
+	 * åˆå§‹åŒ–æœåŠ¡å™¨
 	 * 
-	 * @param serverrate ·şÎñÆ÷µÄ¸üĞÂËÙ¶È/ms
-	 * @return ³É¹¦ = true,Ê§°Ü = false
+	 * @param serverrate æœåŠ¡å™¨çš„æ›´æ–°é€Ÿåº¦/ms
+	 * @return æˆåŠŸ = true,å¤±è´¥ = false
 	 */
 	public boolean initServer(int serverrate){
 		return this.InitServer(serverrate);
 	}
 
 	/**
-	 * È¥³ı·şÎñÆ÷µÄ³õÊ¼»¯
+	 * å»é™¤æœåŠ¡å™¨çš„åˆå§‹åŒ–
 	 * 
-	 * @return ³É¹¦ = true,Ê§°Ü = false
+	 * @return æˆåŠŸ = true,å¤±è´¥ = false
 	 */
 	public boolean uninitServer(){
 		return this.UninitServer();
 	}
 	
 	/**
-	 * ¸ü¸Ä·şÎñÆ÷µÄ¸üĞÂËÙÂÊ
+	 * æ›´æ”¹æœåŠ¡å™¨çš„æ›´æ–°é€Ÿç‡
 	 * 
-	 * @param serverrate ·şÎñÆ÷µÄ¸üĞÂËÙ¶È/ms
-	 * @return ³É¹¦ = true,Ê§°Ü = false
+	 * @param serverrate æœåŠ¡å™¨çš„æ›´æ–°é€Ÿåº¦/ms
+	 * @return æˆåŠŸ = true,å¤±è´¥ = false
 	 */
 	public boolean resetServerRate(int serverrate){
 		return this.ResetServerRate(serverrate);
 	}
 	
 	/**
-	 * ·µ»ØÁ¬½Óµ½·şÎñÆ÷ÉÏµÄ¿Í»§¶ËÊıÁ¿
+	 * è¿”å›è¿æ¥åˆ°æœåŠ¡å™¨ä¸Šçš„å®¢æˆ·ç«¯æ•°é‡
 	 * 
-	 * @return Á¬½Óµ½·şÎñÆ÷ÉÏµÄ¿Í»§¶ËÊıÁ¿
+	 * @return è¿æ¥åˆ°æœåŠ¡å™¨ä¸Šçš„å®¢æˆ·ç«¯æ•°é‡
 	 */
 	public int numbrClientConnections(){
 		return this.NumbrClientConnections();
 	}
 	
 	/**
-	 * Ç¿ÖÆ¶Ï¿ªËùÓĞ¿Í»§¶ËµÄÁ¬½Ó£¬µ«ÊÇ²»È·±£ËùÓĞ¿Í»§¶ËÄÜ¶Ï¿ª
+	 * å¼ºåˆ¶æ–­å¼€æ‰€æœ‰å®¢æˆ·ç«¯çš„è¿æ¥ï¼Œä½†æ˜¯ä¸ç¡®ä¿æ‰€æœ‰å®¢æˆ·ç«¯èƒ½æ–­å¼€
 	 */
 	public void requestDisconnect(){
 		this.RequestDisconnect();
 	}
 	
 	/**
-	 * Ç¿ÖÆ·şÎñÆ÷Ïò¿Í»§¶Ë·¢³öÊı¾İ¸üĞÂ
+	 * å¼ºåˆ¶æœåŠ¡å™¨å‘å®¢æˆ·ç«¯å‘å‡ºæ•°æ®æ›´æ–°
 	 * 
-	 * @return ³É¹¦ = true,Ê§°Ü = false
+	 * @return æˆåŠŸ = true,å¤±è´¥ = false
 	 */
 	public boolean refreshAllClients(){
 		return this.RefreshAllClients();
 	}
 	
 	/**
-	 * ÉèÖÃtagÃüÃû¿Õ¼ä·Ö²¼µÄ±êÖ¾£¬Ä¬ÈÏÎª"."
+	 * è®¾ç½®tagå‘½åç©ºé—´åˆ†å¸ƒçš„æ ‡å¿—ï¼Œé»˜è®¤ä¸º"."
 	 * 
-	 * @param qualifier tagÃüÃû¿Õ¼ä·Ö²¼µÄ±êÖ¾
-	 * @return tagÃüÃû¿Õ¼ä·Ö²¼µÄ±êÖ¾
+	 * @param qualifier tagå‘½åç©ºé—´åˆ†å¸ƒçš„æ ‡å¿—
+	 * @return tagå‘½åç©ºé—´åˆ†å¸ƒçš„æ ‡å¿—
 	 */
 	public char setTagNameQualifier(char qualifier){
 		return this.SetTagNameQualifier(qualifier);
 	}
 	
 	/**
-	 * ÉèÖÃtagµÄ±¨¾¯ÏŞÖµ
+	 * è®¾ç½®tagçš„æŠ¥è­¦é™å€¼
 	 * 
-	 * @param handle TagµÄ¾ä±ú
-	 * @param levelid ·ÖÎª4¸öµÈ¼¶ ID_LOLO_LIMIT = 1£»ID_LO_LIMIT = 2£»ID_HI_LIMIT = 3£»ID_HIHI_LIMIT = 4£»
-	 * @param limits TagµÄ±¨¾¯ÏŞÖµ
-	 * @param severity TagµÄ±¨¾¯ÑÏÖØ³Ì¶È
-	 * @param enabled TagµÄ¸Ã¼¶±ğµÄ±¨¾¯ÊÇ·ñ¿ªÆô
-	 * @return ³É¹¦ = true,Ê§°Ü = false
+	 * @param handle Tagçš„å¥æŸ„
+	 * @param levelid åˆ†ä¸º4ä¸ªç­‰çº§ ID_LOLO_LIMIT = 1ï¼›ID_LO_LIMIT = 2ï¼›ID_HI_LIMIT = 3ï¼›ID_HIHI_LIMIT = 4ï¼›
+	 * @param limits Tagçš„æŠ¥è­¦é™å€¼
+	 * @param severity Tagçš„æŠ¥è­¦ä¸¥é‡ç¨‹åº¦
+	 * @param enabled Tagçš„è¯¥çº§åˆ«çš„æŠ¥è­¦æ˜¯å¦å¼€å¯
+	 * @return æˆåŠŸ = true,å¤±è´¥ = false
 	 */
 	public boolean setItemLevelAlarm(long handle,int levelid ,float limits,long severity,boolean enabled){
 		return this.SetItemLevelAlarm(handle, levelid, limits, severity, enabled);
 	}
 	/**
-	 * ¶ÁÈ¡tagµÄ±¨¾¯ÏŞÖµ
+	 * è¯»å–tagçš„æŠ¥è­¦é™å€¼
 	 * 
-	 * @param handle tagµÄ¾ä±ú
-	 * @param limits TagµÄ±¨¾¯ÏŞÖµ
-	 * @param severity TagµÄ±¨¾¯ÑÏÖØ³Ì¶È
-	 * @param enabled TagµÄ¸Ã¼¶±ğµÄ±¨¾¯ÊÇ·ñ¿ªÆô
-	 * @return ³É¹¦ = true,Ê§°Ü = false
+	 * @param handle tagçš„å¥æŸ„
+	 * @param limits Tagçš„æŠ¥è­¦é™å€¼
+	 * @param severity Tagçš„æŠ¥è­¦ä¸¥é‡ç¨‹åº¦
+	 * @param enabled Tagçš„è¯¥çº§åˆ«çš„æŠ¥è­¦æ˜¯å¦å¼€å¯
+	 * @return æˆåŠŸ = true,å¤±è´¥ = false
 	 */
 	public boolean getItemLevelAlarm(long handle ,float[] limits,long[] severity,boolean[] enabled){
 		String[][] snum = new String[4][];
@@ -187,16 +187,16 @@ public class STOPCServer {
 		gila[1] = this.GetItemLevelAlarm(handle, 2);
 		gila[2] = this.GetItemLevelAlarm(handle, 3);
 		gila[3] = this.GetItemLevelAlarm(handle, 4);
-		//½«×Ö·û´®²ğ½â
+		//å°†å­—ç¬¦ä¸²æ‹†è§£
 		for(int i=0;i<4;i++){
-			if(!(gila[i].equals("null"))){  //Èç¹û²»ÊÇ¿Õ
+			if(!(gila[i].equals("null"))){  //å¦‚æœä¸æ˜¯ç©º
 				snum[i] = gila[i].split("*");
-				//½øĞĞÊı¾İ×ª»»
+				//è¿›è¡Œæ•°æ®è½¬æ¢
 				limits[i] = Float.parseFloat(snum[i][0]);
 				severity[i] = Long.parseLong(snum[i][1]);
 				enabled[i] = Boolean.parseBoolean(snum[i][2]);
 			}
-			else{//Èç¹ûÊÇ¿Õ
+			else{//å¦‚æœæ˜¯ç©º
 				return false;
 			}
 		}
@@ -205,89 +205,89 @@ public class STOPCServer {
 	}
 	
 	/**
-	 * É¾³ıTag
+	 * åˆ é™¤Tag
 	 * 
-	 * @param handle TagµÄ¾ä±ú
-	 * @return ³É¹¦ = true,Ê§°Ü = false
+	 * @param handle Tagçš„å¥æŸ„
+	 * @return æˆåŠŸ = true,å¤±è´¥ = false
 	 */
 	public boolean deleteTag(long handle){
 		return this.DeleteTag(handle);
 	}
 	
 	/**
-	 * ´´½¨¼òµ¥µÄTag
+	 * åˆ›å»ºç®€å•çš„Tag
 	 * 
-	 * @param tags ĞèÒªµÄ²ÎÊı£ºname,value,value_type,iswritable
-	 * @return ´´½¨µÄtagµÄ¾ä±ú
+	 * @param tags éœ€è¦çš„å‚æ•°ï¼šname,value,value_type,iswritable
+	 * @return åˆ›å»ºçš„tagçš„å¥æŸ„
 	 */
 	public long addTag(STTags tags){
 		return this.AddTag(tags.getName(), tags.getValue(), tags.getValue_type(), tags.getIswritable());
 	}
 	
 	/**
-	 * Í¨¹ı¾ä±úÀ´¸üĞÂ¼òµ¥µÄTag
+	 * é€šè¿‡å¥æŸ„æ¥æ›´æ–°ç®€å•çš„Tag
 	 * 
-	 * @param tags ĞèÒªµÄ²ÎÊı£ºhandle£¬value£¬value_type
-	 * @return ³É¹¦ = true,Ê§°Ü = false
+	 * @param tags éœ€è¦çš„å‚æ•°ï¼šhandleï¼Œvalueï¼Œvalue_type
+	 * @return æˆåŠŸ = true,å¤±è´¥ = false
 	 */
 	public boolean updateTag(STTags tags){
 		return this.UpdateTag(tags.getHandle(), tags.getValue(), tags.getValue_type());
 	}
 	
 	/**
-	 * Í¨¹ıTagµÄÃû×ÖÀ´¸üĞÂ¼òµ¥µÄTag
+	 * é€šè¿‡Tagçš„åå­—æ¥æ›´æ–°ç®€å•çš„Tag
 	 * 
-	 * @param tags ĞèÒªµÄ²ÎÊı£ºname£¬value£¬value_type
-	 * @return ³É¹¦ = true,Ê§°Ü = false
+	 * @param tags éœ€è¦çš„å‚æ•°ï¼šnameï¼Œvalueï¼Œvalue_type
+	 * @return æˆåŠŸ = true,å¤±è´¥ = false
 	 */
 	public boolean updateTagByName(STTags tags){         
 		return this.UpdateTagByName(tags.getName(), tags.getValue(), tags.getValue_type());
 	}
 	
 	/**
-	 * ´Ó·şÎñÆ÷ÖĞ¶ÁÈ¡TagµÄÊıÖµ
+	 * ä»æœåŠ¡å™¨ä¸­è¯»å–Tagçš„æ•°å€¼
 	 * 
-	 * @param handle TagµÄ¾ä±ú
+	 * @param handle Tagçš„å¥æŸ„
 	 * @return String[0] = value;String[1] = value_type
 	 */
-	//¶ÁÈ¡TagµÄÖµ
-	//¶ÁÈ¡Tag
+	//è¯»å–Tagçš„å€¼
+	//è¯»å–Tag
 	public String[] readTag(long handle){
 		
 		String Svalue = this.ReadTag(handle);
 		String[] Value = new String[2];
-		if(Svalue.indexOf("VT_INT") !=-1){//Êı¾İÀàĞÍÎªINT       
-			Value[0] = Svalue.replaceAll("VT_INT", "");	//´æÈëÊı¾İ
-			Value[1] = "VT_INT";							//´æÈëÊı¾İÀàĞÍ
+		if(Svalue.indexOf("VT_INT") !=-1){//æ•°æ®ç±»å‹ä¸ºINT       
+			Value[0] = Svalue.replaceAll("VT_INT", "");	//å­˜å…¥æ•°æ®
+			Value[1] = "VT_INT";							//å­˜å…¥æ•°æ®ç±»å‹
 			return Value;
 		}
-		else if(Svalue.indexOf("VT_FLOAT") !=-1){//Êı¾İÀàĞÍÎªFLOAT
-			Value[0] = Svalue.replaceAll("VT_FLOAT", "");	//´æÈëÊı¾İ
-			Value[1] = "VT_FLOAT";							//´æÈëÊı¾İÀàĞÍ
+		else if(Svalue.indexOf("VT_FLOAT") !=-1){//æ•°æ®ç±»å‹ä¸ºFLOAT
+			Value[0] = Svalue.replaceAll("VT_FLOAT", "");	//å­˜å…¥æ•°æ®
+			Value[1] = "VT_FLOAT";							//å­˜å…¥æ•°æ®ç±»å‹
 			return Value;
 		}
-		else if(Svalue.indexOf("VT_BOOLEAN") !=-1){//Êı¾İÀàĞÍÎªBOOLEAN
-			Svalue = Svalue.replaceAll("VT_BOOLEAN", "");	//É¾È¥Êı¾İÀàĞÍ
-			if(Svalue.indexOf("1") !=-1){                  //ÓÉÓÚjavaÖĞµÄBOOLEANÎªTRUEºÍFALSE
-				Value[0] = Svalue.replaceAll("1", "true");	//´æÈëÊı¾İ
+		else if(Svalue.indexOf("VT_BOOLEAN") !=-1){//æ•°æ®ç±»å‹ä¸ºBOOLEAN
+			Svalue = Svalue.replaceAll("VT_BOOLEAN", "");	//åˆ å»æ•°æ®ç±»å‹
+			if(Svalue.indexOf("1") !=-1){                  //ç”±äºjavaä¸­çš„BOOLEANä¸ºTRUEå’ŒFALSE
+				Value[0] = Svalue.replaceAll("1", "true");	//å­˜å…¥æ•°æ®
 			}
 			else if(Svalue.indexOf("0") !=-1){                  
-				Value[0] = Svalue.replaceAll("0", "false");	//´æÈëÊı¾İ
+				Value[0] = Svalue.replaceAll("0", "false");	//å­˜å…¥æ•°æ®
 			}
 			else 
 			{
 				Value[0] = "";
-				System.out.println("Boolean´íÎó"+Svalue);
+				System.out.println("Booleané”™è¯¯"+Svalue);
 			}
-			Value[1] = "VT_BOOLEAN";							//´æÈëÊı¾İÀàĞÍ
+			Value[1] = "VT_BOOLEAN";							//å­˜å…¥æ•°æ®ç±»å‹
 			return Value;
 		}
-		else if(Svalue.indexOf("VT_STRING") !=-1){//Êı¾İÀàĞÍÎªSTRING
-			Value[0] = Svalue.replaceAll("VT_STRING", "");	//´æÈëÊı¾İ
-			Value[1] = "VT_STRING";							//´æÈëÊı¾İÀàĞÍ
+		else if(Svalue.indexOf("VT_STRING") !=-1){//æ•°æ®ç±»å‹ä¸ºSTRING
+			Value[0] = Svalue.replaceAll("VT_STRING", "");	//å­˜å…¥æ•°æ®
+			Value[1] = "VT_STRING";							//å­˜å…¥æ•°æ®ç±»å‹
 			return Value;
 		}
-		else if(Svalue.indexOf("VT_ERROR") !=-1){//Êı¾İÀàĞÍ´íÎó
+		else if(Svalue.indexOf("VT_ERROR") !=-1){//æ•°æ®ç±»å‹é”™è¯¯
 			Value[0] = "";
 			Value[1] = "VT_ERROR";
 			return Value;
@@ -298,59 +298,59 @@ public class STOPCServer {
 	}
 	
 	/**
-	 * ÍêÕû´´½¨Tag
+	 * å®Œæ•´åˆ›å»ºTag
 	 * 
-	 * @param tags ĞèÒªµÄ²ÎÊı£ºname£¬property£¬property_value,value,value_type,readaccesslevel,writeaccesslevel,limits,Severity,Enabled
-	 * @return ´´½¨µÄtagµÄ¾ä±ú
+	 * @param tags éœ€è¦çš„å‚æ•°ï¼šnameï¼Œpropertyï¼Œproperty_value,value,value_type,readaccesslevel,writeaccesslevel,limits,Severity,Enabled
+	 * @return åˆ›å»ºçš„tagçš„å¥æŸ„
 	 */
 	public long allAddTag(STTags tags){
 		return this.AllAddTag(tags.getName(), tags.getProperty(), tags.getProperty_value(), tags.getValue(), tags.getValue_type(), tags.getReadaccesslevel(), tags.getWriteaccesslevel(), tags.getLimits(), tags.getSeverity(), tags.getEnabled());
 	}
 	
 	/**
-	 * ÕûÌå¸üĞÂTag
+	 * æ•´ä½“æ›´æ–°Tag
 	 * 
-	 * @param tags ĞèÒªµÄ²ÎÊı£ºhandle£¬property£¬property_value,value,value_type,readaccesslevel,writeaccesslevel,limits,Severity,Enabled
-	 * @return ³É¹¦ = true,Ê§°Ü = false
+	 * @param tags éœ€è¦çš„å‚æ•°ï¼šhandleï¼Œpropertyï¼Œproperty_value,value,value_type,readaccesslevel,writeaccesslevel,limits,Severity,Enabled
+	 * @return æˆåŠŸ = true,å¤±è´¥ = false
 	 */
 	public boolean allUpdateTag(STTags tags){
 		return this.AllUpdateTag(tags.getHandle(), tags.getProperty(), tags.getProperty_value(), tags.getValue(), tags.getValue_type(), tags.getLimits(), tags.getSeverity(), tags.getEnabled());
 	}
 	
 	/**
-	 * ¿ªÆô»ò¹Ø±Õtag¶Ô¿Í»§¶ËµÄ¸üĞÂ
+	 * å¼€å¯æˆ–å…³é—­tagå¯¹å®¢æˆ·ç«¯çš„æ›´æ–°
 	 * 
-	 * @param handle TagµÄ¾ä±ú
-	 * @param onoff ¹Ø±Õ»ò¿ªÆôtag¶Ô¿Í»§¶ËµÄ¸üĞÂ
-	 * @return ³É¹¦ = true,Ê§°Ü = false
+	 * @param handle Tagçš„å¥æŸ„
+	 * @param onoff å…³é—­æˆ–å¼€å¯tagå¯¹å®¢æˆ·ç«¯çš„æ›´æ–°
+	 * @return æˆåŠŸ = true,å¤±è´¥ = false
 	 */
 	public boolean suspendTagUpdates(long handle,boolean onoff){
 		return this.SuspendTagUpdates(handle, onoff);
 	}
 	
 	/**
-	 * ¿ªÆôÅúÁ¿¸üĞÂTag
+	 * å¼€å¯æ‰¹é‡æ›´æ–°Tag
 	 * 
-	 * @return ³É¹¦ = true,Ê§°Ü = false
+	 * @return æˆåŠŸ = true,å¤±è´¥ = false
 	 */
 	public boolean startUpdateTags(){
 		return this.StartUpdateTags();
 	}
 	
 	/**
-	 * ÅúÁ¿¸üĞÂTag
+	 * æ‰¹é‡æ›´æ–°Tag
 	 * 
-	 * @param tags ĞèÒªµÄ²ÎÊı£ºhandle£¬value£¬value_type
-	 * @return ³É¹¦ = true,Ê§°Ü = false
+	 * @param tags éœ€è¦çš„å‚æ•°ï¼šhandleï¼Œvalueï¼Œvalue_type
+	 * @return æˆåŠŸ = true,å¤±è´¥ = false
 	 */
 	public boolean updateTagsToList(STTags tags){
 		return this.UpdateTagToList(tags.getHandle(), tags.getValue(), tags.getValue_type());
 	}
 	
 	/**
-	 * ¹Ø±ÕÅúÁ¿¸üĞÂTag
+	 * å…³é—­æ‰¹é‡æ›´æ–°Tag
 	 * 
-	 * @return ³É¹¦ = true,Ê§°Ü = false
+	 * @return æˆåŠŸ = true,å¤±è´¥ = false
 	 */
 	public boolean endUpdateTags(){
 		return this.EndUpdateTags();

@@ -1,4 +1,4 @@
-// STOPCServer.cpp : ¶¨Òå DLL Ó¦ÓÃ³ÌĞòµÄµ¼³öº¯Êı¡£
+// STOPCServer.cpp : å®šä¹‰ DLL åº”ç”¨ç¨‹åºçš„å¯¼å‡ºå‡½æ•°ã€‚
 //
 
 #include "stdafx.h"
@@ -28,7 +28,7 @@ WCHAR *WSTRFromCString(const CHAR *buf)
 
 	if (temp)
 	{
-		for (i = 0; i<length; i++) temp[i] = (WCHAR)buf[i];//Ê¹ÓÃÇ¿ÖÆÀàĞÍ×ª»»µÄĞÎÊ½
+		for (i = 0; i<length; i++) temp[i] = (WCHAR)buf[i];//ä½¿ç”¨å¼ºåˆ¶ç±»å‹è½¬æ¢çš„å½¢å¼
 	}
 
 	return temp;
@@ -46,7 +46,7 @@ void WSTRFree(WCHAR * c)
 //Write Notification callback
 //pass control to thge CView
 //which contains the local tag list
-// WriteÍ¨Öª»Øµ÷´«µİ¿Ø¼şµ½°üº¬±¾µØ±êÇ©ÁĞ±íµÄÊÓÍ¼
+// Writeé€šçŸ¥å›è°ƒä¼ é€’æ§ä»¶åˆ°åŒ…å«æœ¬åœ°æ ‡ç­¾åˆ—è¡¨çš„è§†å›¾
 //
 void CALLBACK EXPORT WriteNotifyProc2(HANDLE Handle, VARIANT *pNewValue, DWORD *pDevError, CHAR *pUser)
 {
@@ -84,17 +84,17 @@ void CALLBACK EXPORT DisconnectProc(DWORD NumbrActiveClients)
 //}
 
 
-//***********************ÏÔÊ¾DLLÎÄ¼ş°æ±¾ĞÅÏ¢*****************************//
+//***********************æ˜¾ç¤ºDLLæ–‡ä»¶ç‰ˆæœ¬ä¿¡æ¯*****************************//
 JNIEXPORT jstring JNICALL Java_com_st_opcserver_dll_STOPCServer_OPCsvrRevision(JNIEnv *env, jobject obj)
 {
 	WORD	rev;
 	char buf[100];
 	rev = WTOPCsvrRevision();
 	sprintf_s(buf, "DLL Rev = %x", rev);
-	jstring jsrev = env->NewStringUTF(buf);//char*×ªjstring
+	jstring jsrev = env->NewStringUTF(buf);//char*è½¬jstring
 	return jsrev;
 }
-//**************************×¢²á·şÎñÆ÷***********************************//
+//**************************æ³¨å†ŒæœåŠ¡å™¨***********************************//
 JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_RegistryServer(JNIEnv *env, jobject obj, jstring svrname, jstring svrdescr)
 {
 	const char *SvrName = env->GetStringUTFChars(svrname, NULL);//
@@ -114,7 +114,7 @@ JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_RegistryServer(
 		return (jboolean)0;
 	}
 }
-//**************************Ğ¶ÔØ·şÎñÆ÷***********************************//
+//**************************å¸è½½æœåŠ¡å™¨***********************************//
 JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_UnregisterServer(JNIEnv *env, jobject obj, jstring svrname)
 {
 	const char *SvrName = env->GetStringUTFChars(svrname, NULL);
@@ -129,7 +129,7 @@ JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_UnregisterServe
 		return (jboolean)0;
 	}
 }
-//*************************³õÊ¼»¯·şÎñÆ÷**********************************//
+//*************************åˆå§‹åŒ–æœåŠ¡å™¨**********************************//
 JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_InitServer(JNIEnv *env, jobject obj, jint serverrate)
 {
 	UINT Serverrate = (UINT)serverrate;
@@ -146,38 +146,38 @@ JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_InitServer(JNIE
 	//EnableDisconnectNotification(&DisconnectProc);
 	//EnableDeviceRead(&DeviceReadProc);
 }
-//*************************È¥³ı·şÎñÆ÷µÄ³õÊ¼»¯****************************//
+//*************************å»é™¤æœåŠ¡å™¨çš„åˆå§‹åŒ–****************************//
 JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_UninitServer(JNIEnv *env, jobject obj)
 {
-	//µ÷ÓÃDLL
+	//è°ƒç”¨DLL
 	BOOL bj = UninitWTOPCsvr();
 
 	if (bj) return (jboolean)1;
 	else return (jboolean)0;
 }
-//***********************¸ü¸Ä·şÎñÆ÷µÄ¸üĞÂËÙÂÊ****************************//
+//***********************æ›´æ”¹æœåŠ¡å™¨çš„æ›´æ–°é€Ÿç‡****************************//
 JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_ResetServerRate(JNIEnv *env, jobject obj, jint serverrate)
 {
-	//¸³ÖµServerrate
+	//èµ‹å€¼Serverrate
 	UINT Serverrate = (UINT)serverrate;
-	//µ÷ÓÃDLL
+	//è°ƒç”¨DLL
 	BOOL bj = ResetServerRate(Serverrate);
 
 	if (bj) return (jboolean)1;
 	else return (jboolean)0;
 }
-//****************·µ»ØÁ¬½Óµ½·şÎñÆ÷ÉÏµÄ¿Í»§¶ËÊıÁ¿*************************//
+//****************è¿”å›è¿æ¥åˆ°æœåŠ¡å™¨ä¸Šçš„å®¢æˆ·ç«¯æ•°é‡*************************//
 JNIEXPORT jint JNICALL Java_com_st_opcserver_dll_STOPCServer_NumbrClientConnections(JNIEnv *env, jobject obj)
 {
 	int nb = NumbrClientConnections();
 	return (jint)nb;
 }
-//*****************Ç¿ÖÆ¶Ï¿ªËùÓĞ¿Í»§¶ËµÄÁ¬½Ó******************************//
+//*****************å¼ºåˆ¶æ–­å¼€æ‰€æœ‰å®¢æˆ·ç«¯çš„è¿æ¥******************************//
 JNIEXPORT void JNICALL Java_com_st_opcserver_dll_STOPCServer_RequestDisconnect(JNIEnv *env, jobject obj)
 {
 	RequestDisconnect();
 }
-//*****************Ç¿ÖÆ·şÎñÆ÷Ïò¿Í»§¶Ë·¢³öÊı¾İ¸üĞÂ************************//
+//*****************å¼ºåˆ¶æœåŠ¡å™¨å‘å®¢æˆ·ç«¯å‘å‡ºæ•°æ®æ›´æ–°************************//
 JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_RefreshAllClients(JNIEnv *env, jobject obj)
 {
 	BOOL bj = RefreshAllClients();
@@ -185,45 +185,45 @@ JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_RefreshAllClien
 	if (bj) return (jboolean)1;
 	else return (jboolean)0;
 }
-//**********************ÉèÖÃtagÃüÃû¿Õ¼ä·Ö²¼µÄ±êÖ¾£¬Ä¬ÈÏÎª"."*************//
+//**********************è®¾ç½®tagå‘½åç©ºé—´åˆ†å¸ƒçš„æ ‡å¿—ï¼Œé»˜è®¤ä¸º"."*************//
 JNIEXPORT jchar JNICALL Java_com_st_opcserver_dll_STOPCServer_SetTagNameQualifier(JNIEnv *env, jobject obj, jchar qualifier)
 {
-	//¸³ÖµQualifier
+	//èµ‹å€¼Qualifier
 	char Qualifier = (char)qualifier;
 	char c = SetWtOPCsvrQualifier(Qualifier);
 	return (jchar)c;
 }
-//*************************ÉèÖÃtagÊôĞÔµÄÏêÏ¸ĞÅÏ¢*************************//
+//*************************è®¾ç½®tagå±æ€§çš„è¯¦ç»†ä¿¡æ¯*************************//
 JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_SetTagProperties(JNIEnv *env, jobject obj, jlong handle, jlong propertyid, jstring property, jstring property_value)
 {
-	//¸³ÖµHandle
+	//èµ‹å€¼Handle
 	HANDLE Handle = (HANDLE)handle;
-	//¸³ÖµPropertyid
+	//èµ‹å€¼Propertyid
 	DWORD Propertyid = (DWORD)Propertyid;
-	//¸³ÖµDescription
+	//èµ‹å€¼Description
 	const char * Ccproperty = env->GetStringUTFChars(property, NULL);
 	LPCSTR Property = Ccproperty;
-	//¸³ÖµProperty_Value
+	//èµ‹å€¼Property_Value
 	const char *Property_Value = env->GetStringUTFChars(property_value, NULL);
 	CString CProperty_Value = Property_Value;
 	BSTR BSCProperty_Value = CProperty_Value.AllocSysString();
 	VARIANT	PropertyValue;
-	VariantInit(&PropertyValue);//³õÆÚ»¯ÎªVT_EMPTY
+	VariantInit(&PropertyValue);//åˆæœŸåŒ–ä¸ºVT_EMPTY
 	PropertyValue.vt = VT_BSTR;
 	PropertyValue.bstrVal = BSCProperty_Value;
-	//µ÷ÓÃDLL
+	//è°ƒç”¨DLL
 	BOOL bj = SetTagProperties(Handle, Propertyid, Property, PropertyValue);
 	
-	//»ØÊÕÄÚ´æ
-	VariantClear(&PropertyValue);//Çå³ıVvlaue
-	SysFreeString(BSCProperty_Value);//»ØÊÕ
+	//å›æ”¶å†…å­˜
+	VariantClear(&PropertyValue);//æ¸…é™¤Vvlaue
+	SysFreeString(BSCProperty_Value);//å›æ”¶
 	env->ReleaseStringUTFChars(property, Ccproperty);
 	env->ReleaseStringUTFChars(property_value, Property_Value);
 
 	if (bj) return (jboolean)1;
 	else return (jboolean)0;
 }
-//***************************É¾³ıTag*************************************//
+//***************************åˆ é™¤Tag*************************************//
 JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_DeleteTag(JNIEnv *env, jobject obj, jlong handle)
 {
 	HANDLE Handle = (HANDLE)handle;
@@ -231,37 +231,37 @@ JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_DeleteTag(JNIEn
 		return (jboolean)1;
 	else return (jboolean)0;
 }
-//***************************´´½¨¼òµ¥µÄTag*************************************//
+//***************************åˆ›å»ºç®€å•çš„Tag*************************************//
 JNIEXPORT jlong JNICALL Java_com_st_opcserver_dll_STOPCServer_AddTag(JNIEnv *env, jobject obj, jstring name, jstring value, jstring value_type, jboolean iswritable)
 {
-	//¸³ÖµName
+	//èµ‹å€¼Name
 	const char *Name = env->GetStringUTFChars(name, NULL);
-	//¸³Öµiswritable
+	//èµ‹å€¼iswritable
 	BOOL IsWritable = iswritable;
-	//³õÊ¼»¯Ò»¸öHANDLE
+	//åˆå§‹åŒ–ä¸€ä¸ªHANDLE
 	HANDLE Handle = NULL;
-	//¸³ÖµValue£¬²¢×ª»¯ÎªVARIANT
+	//èµ‹å€¼Valueï¼Œå¹¶è½¬åŒ–ä¸ºVARIANT
 	const char *Value = env->GetStringUTFChars(value, NULL);
 	const char *Value_type = env->GetStringUTFChars(value_type, NULL);
 	VARIANT Vvalue;
-	VariantInit(&Vvalue);//³õÆÚ»¯ÎªVT_EMPTY
-	if (strcmp("VT_INT", Value_type) == 0)//ValueÀàĞÍÎªINT
+	VariantInit(&Vvalue);//åˆæœŸåŒ–ä¸ºVT_EMPTY
+	if (strcmp("VT_INT", Value_type) == 0)//Valueç±»å‹ä¸ºINT
 	{
 		string Svalue = Value;
 		int Ivalue = stoi(Svalue);
 		Vvalue.vt = VT_INT;
 		Vvalue.intVal = Ivalue;
 	}
-	else if (strcmp("VT_DOUBLE", Value_type) == 0)//ValueÀàĞÍÎªDOUBLE
+	else if (strcmp("VT_DOUBLE", Value_type) == 0)//Valueç±»å‹ä¸ºDOUBLE
 	{
 		string Svalue = Value;
 		double Dvalue = stod(Svalue);
 		Vvalue.vt = VT_R8;
 		Vvalue.dblVal = Dvalue;
 	}
-	else if (strcmp("VT_BOOLEAN", Value_type) == 0)//ValueÀàĞÍÎªBOOLEAN
+	else if (strcmp("VT_BOOLEAN", Value_type) == 0)//Valueç±»å‹ä¸ºBOOLEAN
 	{
-		if (strcmp("true", Value) == 0)//ÒòÎªjavaÖĞÊ¹ÓÃµÄÊÇtrue/false£¬´Ë´¦ÊÇÎªÁË¼æÈİ
+		if (strcmp("true", Value) == 0)//å› ä¸ºjavaä¸­ä½¿ç”¨çš„æ˜¯true/falseï¼Œæ­¤å¤„æ˜¯ä¸ºäº†å…¼å®¹
 		{
 			BOOL Bvalue = 1;
 			Vvalue.vt = VT_BOOL;
@@ -273,7 +273,7 @@ JNIEXPORT jlong JNICALL Java_com_st_opcserver_dll_STOPCServer_AddTag(JNIEnv *env
 			Vvalue.vt = VT_BOOL;
 			Vvalue.boolVal = Bvalue;
 		}
-		else//Èç¹ûÊäÈëµÄ²»ÊÇtrue/falae
+		else//å¦‚æœè¾“å…¥çš„ä¸æ˜¯true/falae
 		{
 			string Svalue = Value;
 			BOOL Bvalue = stoi(Svalue);
@@ -281,67 +281,67 @@ JNIEXPORT jlong JNICALL Java_com_st_opcserver_dll_STOPCServer_AddTag(JNIEnv *env
 			Vvalue.boolVal = Bvalue;
 		}
 	}
-	else if (strcmp("VT_STRING", Value_type) == 0)//ValueÀàĞÍÎªSTRING
+	else if (strcmp("VT_STRING", Value_type) == 0)//Valueç±»å‹ä¸ºSTRING
 	{
 		CString Cvalue = Value;
 		BSTR BSValue = Cvalue.AllocSysString();
 		Vvalue.vt = VT_BSTR;
 		Vvalue.bstrVal = BSValue;
 		Handle = CreateTag(Name, Vvalue, OPC_QUALITY_GOOD, IsWritable);
-		VariantClear(&Vvalue);//Çå³ıVvlaue
-		SysFreeString(BSValue);//»ØÊÕ
+		VariantClear(&Vvalue);//æ¸…é™¤Vvlaue
+		SysFreeString(BSValue);//å›æ”¶
 	}
 	else
 	{
-		printf("C++ÌáÊ¾£ºÊı¾İÀàĞÍÊäÈë´íÎó£¬AddTagÊ§°Ü");
-		VariantClear(&Vvalue);//Çå³ıVvlaue
+		printf("C++æç¤ºï¼šæ•°æ®ç±»å‹è¾“å…¥é”™è¯¯ï¼ŒAddTagå¤±è´¥");
+		VariantClear(&Vvalue);//æ¸…é™¤Vvlaue
 		env->ReleaseStringUTFChars(name, Name);
 		env->ReleaseStringUTFChars(value, Value);
 		env->ReleaseStringUTFChars(value_type, Value_type);
 		return -2;
 	}
-	//µ÷ÓÃDLLÎÄ¼ş
-	if (strcmp("VT_STRING", Value_type) != 0)//ValueÀàĞÍ²»ÎªSTRING
+	//è°ƒç”¨DLLæ–‡ä»¶
+	if (strcmp("VT_STRING", Value_type) != 0)//Valueç±»å‹ä¸ä¸ºSTRING
 	{
 		Handle = CreateTag(Name, Vvalue, OPC_QUALITY_GOOD, IsWritable);
-		VariantClear(&Vvalue);//Çå³ıVvlaue
+		VariantClear(&Vvalue);//æ¸…é™¤Vvlaue
 	}
 
 	env->ReleaseStringUTFChars(name, Name);
 	env->ReleaseStringUTFChars(value, Value);
 	env->ReleaseStringUTFChars(value_type, Value_type);
-	printf("C++ÌáÊ¾£ºAddTag,HANDLE=%u\n", (UINT32)Handle);
+	printf("C++æç¤ºï¼šAddTag,HANDLE=%u\n", (UINT32)Handle);
 	return (UINT32)Handle;
 }
-//*************************¸üĞÂ¼òµ¥µÄTag***************************************//
+//*************************æ›´æ–°ç®€å•çš„Tag***************************************//
 JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_UpdateTag(JNIEnv *env, jobject obj, jlong handle, jstring value, jstring value_type)
 {
-	//¸³ÖµHANDLE
+	//èµ‹å€¼HANDLE
 	HANDLE Handle = (HANDLE)handle;
-	//ÓÃÓÚÅĞ¶Ï¸üĞÂÊÇ·ñ³É¹¦
+	//ç”¨äºåˆ¤æ–­æ›´æ–°æ˜¯å¦æˆåŠŸ
 	BOOL bj = 0;
-	//¸³ÖµValue£¬²¢×ª»¯ÎªVARIANT
+	//èµ‹å€¼Valueï¼Œå¹¶è½¬åŒ–ä¸ºVARIANT
 	const char *Value = env->GetStringUTFChars(value, NULL);
 	const char *Value_type = env->GetStringUTFChars(value_type, NULL);
 	VARIANT Vvalue;
-	VariantInit(&Vvalue);//³õÆÚ»¯ÎªVT_EMPTY
-	if (strcmp("VT_INT", Value_type) == 0)//ValueÀàĞÍÎªINT
+	VariantInit(&Vvalue);//åˆæœŸåŒ–ä¸ºVT_EMPTY
+	if (strcmp("VT_INT", Value_type) == 0)//Valueç±»å‹ä¸ºINT
 	{
 		string Svalue = Value;
 		int Ivalue = stoi(Svalue);
 		Vvalue.vt = VT_INT;
 		Vvalue.intVal = Ivalue;
 	}
-	else if (strcmp("VT_DOUBLE", Value_type) == 0)//ValueÀàĞÍÎªDOUBLE
+	else if (strcmp("VT_DOUBLE", Value_type) == 0)//Valueç±»å‹ä¸ºDOUBLE
 	{
 		string Svalue = Value;
 		double Dvalue = stod(Svalue);
 		Vvalue.vt = VT_R8;
 		Vvalue.dblVal = Dvalue;
 	}
-	else if (strcmp("VT_BOOLEAN", Value_type) == 0)//ValueÀàĞÍÎªBOOLEAN
+	else if (strcmp("VT_BOOLEAN", Value_type) == 0)//Valueç±»å‹ä¸ºBOOLEAN
 	{
-		if (strcmp("true", Value) == 0)//ÒòÎªjavaÖĞÊ¹ÓÃµÄÊÇtrue/false£¬´Ë´¦ÊÇÎªÁË¼æÈİ
+		if (strcmp("true", Value) == 0)//å› ä¸ºjavaä¸­ä½¿ç”¨çš„æ˜¯true/falseï¼Œæ­¤å¤„æ˜¯ä¸ºäº†å…¼å®¹
 		{
 			BOOL Bvalue = 1;
 			Vvalue.vt = VT_BOOL;
@@ -353,7 +353,7 @@ JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_UpdateTag(JNIEn
 			Vvalue.vt = VT_BOOL;
 			Vvalue.boolVal = Bvalue;
 		}
-		else//Èç¹ûÊäÈëµÄ²»ÊÇtrue/falae
+		else//å¦‚æœè¾“å…¥çš„ä¸æ˜¯true/falae
 		{
 			string Svalue = Value;
 			BOOL Bvalue = stoi(Svalue);
@@ -361,29 +361,29 @@ JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_UpdateTag(JNIEn
 			Vvalue.boolVal = Bvalue;
 		}
 	}
-	else if (strcmp("VT_STRING", Value_type) == 0)//ValueÀàĞÍÎªSTRING
+	else if (strcmp("VT_STRING", Value_type) == 0)//Valueç±»å‹ä¸ºSTRING
 	{
 		CString Cvalue = Value;
 		BSTR BSValue = Cvalue.AllocSysString();
 		Vvalue.vt = VT_BSTR;
 		Vvalue.bstrVal = BSValue;
 		bj = UpdateTag(Handle, Vvalue, OPC_QUALITY_GOOD);
-		VariantClear(&Vvalue);//Çå³ıVvlaue
-		SysFreeString(BSValue);//»ØÊÕ
+		VariantClear(&Vvalue);//æ¸…é™¤Vvlaue
+		SysFreeString(BSValue);//å›æ”¶
 	}
 	else
 	{
-		printf("C++ÌáÊ¾£ºÊı¾İÀàĞÍÊäÈë´íÎó£¬UpdateTagÊ§°Ü");
-		VariantClear(&Vvalue);//Çå³ıVvlaue
+		printf("C++æç¤ºï¼šæ•°æ®ç±»å‹è¾“å…¥é”™è¯¯ï¼ŒUpdateTagå¤±è´¥");
+		VariantClear(&Vvalue);//æ¸…é™¤Vvlaue
 		env->ReleaseStringUTFChars(value, Value);
 		env->ReleaseStringUTFChars(value_type, Value_type);
 		return (jboolean)0;
 	}
-	//µ÷ÓÃDLLÎÄ¼ş
-	if (strcmp("VT_STRING", Value_type) != 0)//ValueÀàĞÍ²»ÎªSTRING£¬ÎªÁË½â¾öSysFreeString(BSValue);µÄÎÊÌâ
+	//è°ƒç”¨DLLæ–‡ä»¶
+	if (strcmp("VT_STRING", Value_type) != 0)//Valueç±»å‹ä¸ä¸ºSTRINGï¼Œä¸ºäº†è§£å†³SysFreeString(BSValue);çš„é—®é¢˜
 	{
 		bj = UpdateTag(Handle, Vvalue, OPC_QUALITY_GOOD);
-		VariantClear(&Vvalue);//Çå³ıVvlaue
+		VariantClear(&Vvalue);//æ¸…é™¤Vvlaue
 	}
 
 	env->ReleaseStringUTFChars(value, Value);
@@ -393,35 +393,35 @@ JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_UpdateTag(JNIEn
 
 	return  (jboolean)0;
 }
-//************************¸üĞÂTag by name********************************//
+//************************æ›´æ–°Tag by name********************************//
 JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_UpdateTagByName(JNIEnv *env, jobject obj, jstring name, jstring value, jstring value_type)
 {
-	//¸³ÖµName
+	//èµ‹å€¼Name
 	const char *Name = env->GetStringUTFChars(name, NULL);
-	//ÓÃÓÚÅĞ¶Ï¸üĞÂÊÇ·ñ³É¹¦
+	//ç”¨äºåˆ¤æ–­æ›´æ–°æ˜¯å¦æˆåŠŸ
 	BOOL bj = 0;
-	//¸³ÖµValue£¬²¢×ª»¯ÎªVARIANT
+	//èµ‹å€¼Valueï¼Œå¹¶è½¬åŒ–ä¸ºVARIANT
 	const char *Value = env->GetStringUTFChars(value, NULL);
 	const char *Value_type = env->GetStringUTFChars(value_type, NULL);
 	VARIANT Vvalue;
-	VariantInit(&Vvalue);//³õÆÚ»¯ÎªVT_EMPTY
-	if (strcmp("VT_INT", Value_type) == 0)//ValueÀàĞÍÎªINT
+	VariantInit(&Vvalue);//åˆæœŸåŒ–ä¸ºVT_EMPTY
+	if (strcmp("VT_INT", Value_type) == 0)//Valueç±»å‹ä¸ºINT
 	{
 		string Svalue = Value;
 		int Ivalue = stoi(Svalue);
 		Vvalue.vt = VT_INT;
 		Vvalue.intVal = Ivalue;
 	}
-	else if (strcmp("VT_DOUBLE", Value_type) == 0)//ValueÀàĞÍÎªDOUBLE
+	else if (strcmp("VT_DOUBLE", Value_type) == 0)//Valueç±»å‹ä¸ºDOUBLE
 	{
 		string Svalue = Value;
 		double Dvalue = stod(Svalue);
 		Vvalue.vt = VT_R8;
 		Vvalue.dblVal = Dvalue;
 	}
-	else if (strcmp("VT_BOOLEAN", Value_type) == 0)//ValueÀàĞÍÎªBOOLEAN
+	else if (strcmp("VT_BOOLEAN", Value_type) == 0)//Valueç±»å‹ä¸ºBOOLEAN
 	{
-		if (strcmp("true", Value) == 0)//ÒòÎªjavaÖĞÊ¹ÓÃµÄÊÇtrue/false£¬´Ë´¦ÊÇÎªÁË¼æÈİ
+		if (strcmp("true", Value) == 0)//å› ä¸ºjavaä¸­ä½¿ç”¨çš„æ˜¯true/falseï¼Œæ­¤å¤„æ˜¯ä¸ºäº†å…¼å®¹
 		{
 			BOOL Bvalue = 1;
 			Vvalue.vt = VT_BOOL;
@@ -433,7 +433,7 @@ JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_UpdateTagByName
 			Vvalue.vt = VT_BOOL;
 			Vvalue.boolVal = Bvalue;
 		}
-		else//Èç¹ûÊäÈëµÄ²»ÊÇtrue/falae
+		else//å¦‚æœè¾“å…¥çš„ä¸æ˜¯true/falae
 		{
 			string Svalue = Value;
 			BOOL Bvalue = stoi(Svalue);
@@ -441,30 +441,30 @@ JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_UpdateTagByName
 			Vvalue.boolVal = Bvalue;
 		}
 	}
-	else if (strcmp("VT_STRING", Value_type) == 0)//ValueÀàĞÍÎªSTRING
+	else if (strcmp("VT_STRING", Value_type) == 0)//Valueç±»å‹ä¸ºSTRING
 	{
 		CString Cvalue = Value;
 		BSTR BSValue = Cvalue.AllocSysString();
 		Vvalue.vt = VT_BSTR;
 		Vvalue.bstrVal = BSValue;
 		bj = UpdateTagByName(Name, Vvalue, OPC_QUALITY_GOOD);
-		VariantClear(&Vvalue);//Çå³ıVvlaue
-		SysFreeString(BSValue);//»ØÊÕ
+		VariantClear(&Vvalue);//æ¸…é™¤Vvlaue
+		SysFreeString(BSValue);//å›æ”¶
 	}
 	else
 	{
-		printf("C++ÌáÊ¾£ºÊı¾İÀàĞÍÊäÈë´íÎó£¬UpdateTagÊ§°Ü");
-		VariantClear(&Vvalue);//Çå³ıVvlaue
+		printf("C++æç¤ºï¼šæ•°æ®ç±»å‹è¾“å…¥é”™è¯¯ï¼ŒUpdateTagå¤±è´¥");
+		VariantClear(&Vvalue);//æ¸…é™¤Vvlaue
 		env->ReleaseStringUTFChars(name, Name);
 		env->ReleaseStringUTFChars(value, Value);
 		env->ReleaseStringUTFChars(value_type, Value_type);
 		return (jboolean)0;
 	}
-	//µ÷ÓÃDLLÎÄ¼ş
-	if (strcmp("VT_STRING", Value_type) != 0)//ValueÀàĞÍ²»ÎªSTRING£¬ÎªÁË½â¾öSysFreeString(BSValue);µÄÎÊÌâ
+	//è°ƒç”¨DLLæ–‡ä»¶
+	if (strcmp("VT_STRING", Value_type) != 0)//Valueç±»å‹ä¸ä¸ºSTRINGï¼Œä¸ºäº†è§£å†³SysFreeString(BSValue);çš„é—®é¢˜
 	{
 		bj = UpdateTagByName(Name, Vvalue, OPC_QUALITY_GOOD);
-		VariantClear(&Vvalue);//Çå³ıVvlaue
+		VariantClear(&Vvalue);//æ¸…é™¤Vvlaue
 	}
 
 	env->ReleaseStringUTFChars(name, Name);
@@ -475,16 +475,16 @@ JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_UpdateTagByName
 	return  (jboolean)0;
 
 }
-//************************¶ÁÈ¡Tag****************************************//
+//************************è¯»å–Tag****************************************//
 JNIEXPORT jstring JNICALL Java_com_st_opcserver_dll_STOPCServer_ReadTag(JNIEnv *env, jobject obj, jlong handle)
 {
-	//¸³ÖµHANDLE
+	//èµ‹å€¼HANDLE
 	HANDLE Handle = (HANDLE)handle;
-	//»ñÈ¡Value
+	//è·å–Value
 	VARIANT Value;
-	VariantInit(&Value);//³õÆÚ»¯ÎªVT_EMPTY
+	VariantInit(&Value);//åˆæœŸåŒ–ä¸ºVT_EMPTY
 	ReadTag(Handle, &Value);
-	if (Value.vt == VT_INT)//Êı¾İÀàĞÍÎªINT
+	if (Value.vt == VT_INT)//æ•°æ®ç±»å‹ä¸ºINT
 	{
 		int Ivalue = Value.intVal;
 		string Svalue = to_string(Ivalue);
@@ -492,12 +492,12 @@ JNIEXPORT jstring JNICALL Java_com_st_opcserver_dll_STOPCServer_ReadTag(JNIEnv *
 		string Stvalue = Value_type + Svalue;
 		const char *Ccvalue = Stvalue.data();
 		jstring Vvalue = env->NewStringUTF(Ccvalue);
-		printf("C++ÌáÊ¾£ºHANDLE = %u", handle);
-		printf("µÄTagÖµ = %s\n", Ccvalue);
-		VariantClear(&Value);//Çå³ıValue
+		printf("C++æç¤ºï¼šHANDLE = %u", handle);
+		printf("çš„Tagå€¼ = %s\n", Ccvalue);
+		VariantClear(&Value);//æ¸…é™¤Value
 		return Vvalue;
 	}
-	else if (Value.vt == VT_R8)//Êı¾İÀàĞÍÎªDOUBLE
+	else if (Value.vt == VT_R8)//æ•°æ®ç±»å‹ä¸ºDOUBLE
 	{
 		double Dvalue = Value.dblVal;
 		string Svalue = to_string(Dvalue);
@@ -505,12 +505,12 @@ JNIEXPORT jstring JNICALL Java_com_st_opcserver_dll_STOPCServer_ReadTag(JNIEnv *
 		string Stvalue = Value_type + Svalue;
 		const char *Ccvalue = Stvalue.data();
 		jstring Vvalue = env->NewStringUTF(Ccvalue);
-		printf("C++ÌáÊ¾£ºHANDLE = %u", handle);
-		printf("µÄTagÖµ = %s\n", Ccvalue);
-		VariantClear(&Value);//Çå³ıValue
+		printf("C++æç¤ºï¼šHANDLE = %u", handle);
+		printf("çš„Tagå€¼ = %s\n", Ccvalue);
+		VariantClear(&Value);//æ¸…é™¤Value
 		return Vvalue;
 	}
-	else if (Value.vt == VT_BOOL)//Êı¾İÀàĞÍÎªBOOLEAN
+	else if (Value.vt == VT_BOOL)//æ•°æ®ç±»å‹ä¸ºBOOLEAN
 	{
 		BOOL Bvalue = Value.boolVal;
 		string Svalue = to_string(Bvalue);
@@ -518,48 +518,48 @@ JNIEXPORT jstring JNICALL Java_com_st_opcserver_dll_STOPCServer_ReadTag(JNIEnv *
 		string Stvalue = Value_type + Svalue;
 		const char *Ccvalue = Stvalue.data();
 		jstring Vvalue = env->NewStringUTF(Ccvalue);
-		printf("C++ÌáÊ¾£ºHANDLE = %u", handle);
-		printf("µÄTagÖµ = %s\n", Ccvalue);
-		VariantClear(&Value);//Çå³ıValue
+		printf("C++æç¤ºï¼šHANDLE = %u", handle);
+		printf("çš„Tagå€¼ = %s\n", Ccvalue);
+		VariantClear(&Value);//æ¸…é™¤Value
 		return Vvalue;
 	}
 	else if (Value.vt == VT_BSTR)
 	{
 		BSTR Bvalue = Value.bstrVal;
-		const char* TCcvalue = _com_util::ConvertBSTRToString(Bvalue);//BSTR--¡·const char *
+		const char* TCcvalue = _com_util::ConvertBSTRToString(Bvalue);//BSTR--ã€‹const char *
 		string Svalue = TCcvalue;
 		string Value_type = "VT_STRING";
 		string Stvalue = Value_type + Svalue;
 		const char *Ccvalue = Stvalue.data();
 		jstring Vvalue = env->NewStringUTF(Ccvalue);
-		printf("C++ÌáÊ¾£ºHANDLE = %u", handle);
-		printf("µÄTagÖµ = %s\n", Ccvalue);
-		SysFreeString(Bvalue);//ÊÍ·ÅBvalue
-		VariantClear(&Value);//Çå³ıValue
+		printf("C++æç¤ºï¼šHANDLE = %u", handle);
+		printf("çš„Tagå€¼ = %s\n", Ccvalue);
+		SysFreeString(Bvalue);//é‡Šæ”¾Bvalue
+		VariantClear(&Value);//æ¸…é™¤Value
 		return Vvalue;
 	}
-	//Êı¾İÀàĞÍ´íÎó
+	//æ•°æ®ç±»å‹é”™è¯¯
 	const char *Ccvalue = "VT_ERROR";
 	jstring Vvalue = env->NewStringUTF(Ccvalue);
-	printf("C++ÌáÊ¾£ºHANDLE = %u", handle);
-	printf("µÄTagÖµ = %s\n", Ccvalue);
-	VariantClear(&Value);//Çå³ıValue
+	printf("C++æç¤ºï¼šHANDLE = %u", handle);
+	printf("çš„Tagå€¼ = %s\n", Ccvalue);
+	VariantClear(&Value);//æ¸…é™¤Value
 	return Vvalue;
 }
-//************************ÕûÌå´´½¨Tag***********************************//
+//************************æ•´ä½“åˆ›å»ºTag***********************************//
 JNIEXPORT jlong JNICALL Java_com_st_opcserver_dll_STOPCServer_AllAddTag(JNIEnv *env, jobject obj, jstring name, jstring property, jstring property_value, jstring value, jstring value_type, jlong readAccesslevel, jlong writeAccessLevel, jfloatArray limits, jlongArray severity, jbooleanArray enabled)
 {
-	//¸³ÖµName
+	//èµ‹å€¼Name
 	const char *Name = env->GetStringUTFChars(name, NULL);
-	//¸³ÖµProperty
+	//èµ‹å€¼Property
 	const char *Property = env->GetStringUTFChars(property, NULL);
-	//¸³ÖµProperty_value
+	//èµ‹å€¼Property_value
 	const char *Property_value = env->GetStringUTFChars(property_value, NULL);
-	//¸³ÖµReadAccessLevel
+	//èµ‹å€¼ReadAccessLevel
 	DWORD ReadAccessLevel = (DWORD)readAccesslevel;
-	//¸³ÖµWriteAccessLevel
+	//èµ‹å€¼WriteAccessLevel
 	DWORD WriteAccessLevel = (DWORD)writeAccessLevel;
-	//¸³ÖµLimits
+	//èµ‹å€¼Limits
 	jfloat jlimits[4];
 	env->GetFloatArrayRegion(limits, 0, 4, jlimits);
 	float Limits[4];
@@ -567,7 +567,7 @@ JNIEXPORT jlong JNICALL Java_com_st_opcserver_dll_STOPCServer_AllAddTag(JNIEnv *
 	{
 		Limits[i] = (float)jlimits[i];
 	}
-	//¸³ÖµSeverity
+	//èµ‹å€¼Severity
 	jlong jseverity[4];
 	env->GetLongArrayRegion(severity, 0, 4, jseverity);
 	DWORD Severity[4];
@@ -575,7 +575,7 @@ JNIEXPORT jlong JNICALL Java_com_st_opcserver_dll_STOPCServer_AllAddTag(JNIEnv *
 	{
 		Severity[i] = (DWORD)jseverity[i];
 	}
-	//¸³ÖµEnabled
+	//èµ‹å€¼Enabled
 	jboolean jenabled[4];
 	env->SetBooleanArrayRegion(enabled, 0, 4, jenabled);
 	BOOL Enabled[4];
@@ -583,30 +583,30 @@ JNIEXPORT jlong JNICALL Java_com_st_opcserver_dll_STOPCServer_AllAddTag(JNIEnv *
 	{
 		Enabled[i] = (BOOL)jenabled[i];
 	}
-	//³õÊ¼»¯Ò»¸öHANDLE
+	//åˆå§‹åŒ–ä¸€ä¸ªHANDLE
 	HANDLE Handle = NULL;
-	//¸³ÖµValue£¬²¢×ª»¯ÎªVARIANT
+	//èµ‹å€¼Valueï¼Œå¹¶è½¬åŒ–ä¸ºVARIANT
 	const char *Value = env->GetStringUTFChars(value, NULL);
 	const char *Value_type = env->GetStringUTFChars(value_type, NULL);
 	VARIANT Vvalue;
-	VariantInit(&Vvalue);//³õÆÚ»¯ÎªVT_EMPTY
-	if (strcmp("VT_INT", Value_type) == 0)//ValueÀàĞÍÎªINT
+	VariantInit(&Vvalue);//åˆæœŸåŒ–ä¸ºVT_EMPTY
+	if (strcmp("VT_INT", Value_type) == 0)//Valueç±»å‹ä¸ºINT
 	{
 		string Svalue = Value;
 		int Ivalue = stoi(Svalue);
 		Vvalue.vt = VT_INT;
 		Vvalue.intVal = Ivalue;
 	}
-	else if (strcmp("VT_DOUBLE", Value_type) == 0)//ValueÀàĞÍÎªDOUBLE
+	else if (strcmp("VT_DOUBLE", Value_type) == 0)//Valueç±»å‹ä¸ºDOUBLE
 	{
 		string Svalue = Value;
 		double Dvalue = stod(Svalue);
 		Vvalue.vt = VT_R8;
 		Vvalue.dblVal = Dvalue;
 	}
-	else if (strcmp("VT_BOOLEAN", Value_type) == 0)//ValueÀàĞÍÎªBOOLEAN
+	else if (strcmp("VT_BOOLEAN", Value_type) == 0)//Valueç±»å‹ä¸ºBOOLEAN
 	{
-		if (strcmp("true", Value) == 0)//ÒòÎªjavaÖĞÊ¹ÓÃµÄÊÇtrue/false£¬´Ë´¦ÊÇÎªÁË¼æÈİ
+		if (strcmp("true", Value) == 0)//å› ä¸ºjavaä¸­ä½¿ç”¨çš„æ˜¯true/falseï¼Œæ­¤å¤„æ˜¯ä¸ºäº†å…¼å®¹
 		{
 			BOOL Bvalue = 1;
 			Vvalue.vt = VT_BOOL;
@@ -618,7 +618,7 @@ JNIEXPORT jlong JNICALL Java_com_st_opcserver_dll_STOPCServer_AllAddTag(JNIEnv *
 			Vvalue.vt = VT_BOOL;
 			Vvalue.boolVal = Bvalue;
 		}
-		else//Èç¹ûÊäÈëµÄ²»ÊÇtrue/falae
+		else//å¦‚æœè¾“å…¥çš„ä¸æ˜¯true/falae
 		{
 			string Svalue = Value;
 			BOOL Bvalue = stoi(Svalue);
@@ -626,20 +626,20 @@ JNIEXPORT jlong JNICALL Java_com_st_opcserver_dll_STOPCServer_AllAddTag(JNIEnv *
 			Vvalue.boolVal = Bvalue;
 		}
 	}
-	else if (strcmp("VT_STRING", Value_type) == 0)//ValueÀàĞÍÎªSTRING
+	else if (strcmp("VT_STRING", Value_type) == 0)//Valueç±»å‹ä¸ºSTRING
 	{
 		CString Cvalue = Value;
 		BSTR BSValue = Cvalue.AllocSysString();
 		Vvalue.vt = VT_BSTR;
 		Vvalue.bstrVal = BSValue;
 		Handle = CreateSecureTag(Name, Vvalue, OPC_QUALITY_GOOD, ReadAccessLevel, WriteAccessLevel);
-		VariantClear(&Vvalue);//Çå³ıVvlaue
-		SysFreeString(BSValue);//»ØÊÕ
+		VariantClear(&Vvalue);//æ¸…é™¤Vvlaue
+		SysFreeString(BSValue);//å›æ”¶
 	}
 	else
 	{
-		printf("C++ÌáÊ¾£ºÊı¾İÀàĞÍÊäÈë´íÎó£¬AllAddTagÊ§°Ü");
-		VariantClear(&Vvalue);//Çå³ıVvlaue
+		printf("C++æç¤ºï¼šæ•°æ®ç±»å‹è¾“å…¥é”™è¯¯ï¼ŒAllAddTagå¤±è´¥");
+		VariantClear(&Vvalue);//æ¸…é™¤Vvlaue
 		env->ReleaseStringUTFChars(name, Name);
 		env->ReleaseStringUTFChars(property, Property);
 		env->ReleaseStringUTFChars(property_value, Property_value);
@@ -647,52 +647,52 @@ JNIEXPORT jlong JNICALL Java_com_st_opcserver_dll_STOPCServer_AllAddTag(JNIEnv *
 		env->ReleaseStringUTFChars(value_type, Value_type);
 		return -2;
 	}
-	//µ÷ÓÃDLLÎÄ¼ş
-	if (strcmp("VT_STRING", Value_type) != 0)//ValueÀàĞÍ²»ÎªSTRING£¬ÎªÁË½â¾öSysFreeString(BSValue);µÄÎÊÌâ
+	//è°ƒç”¨DLLæ–‡ä»¶
+	if (strcmp("VT_STRING", Value_type) != 0)//Valueç±»å‹ä¸ä¸ºSTRINGï¼Œä¸ºäº†è§£å†³SysFreeString(BSValue);çš„é—®é¢˜
 	{
 		Handle = CreateSecureTag(Name, Vvalue, OPC_QUALITY_GOOD, ReadAccessLevel, WriteAccessLevel);
-		VariantClear(&Vvalue);//Çå³ıVvlaue
+		VariantClear(&Vvalue);//æ¸…é™¤Vvlaue
 	}
 
-	//ÉèÖÃÊôĞÔºÍÊôĞÔÖµ
+	//è®¾ç½®å±æ€§å’Œå±æ€§å€¼
 	VARIANT	PropertyValue;
-	VariantInit(&PropertyValue);//³õÆÚ»¯ÎªVT_EMPTY
-	PropertyValue.vt = VT_BSTR;//unsigned short£¬±íÊ¾Êı¾İÀàĞÍ
-	CString CProperty_value = Property_value;//const char*--¡·CString
-	WCHAR *pWCHAR = WSTRFromCString(CProperty_value);//CString¡ª¡ª¡·WCHAR
+	VariantInit(&PropertyValue);//åˆæœŸåŒ–ä¸ºVT_EMPTY
+	PropertyValue.vt = VT_BSTR;//unsigned shortï¼Œè¡¨ç¤ºæ•°æ®ç±»å‹
+	CString CProperty_value = Property_value;//const char*--ã€‹CString
+	WCHAR *pWCHAR = WSTRFromCString(CProperty_value);//CStringâ€”â€”ã€‹WCHAR
 	PropertyValue.bstrVal = SysAllocString(pWCHAR);
-	WSTRFree(pWCHAR);//ÊÍ·ÅWCHARÀàĞÍµÄÊı¾İÔ´
-					 //µ÷ÓÃDLLº¯Êı£¬±ê¼ÇÊôĞÔÊÇÓëOPCÏîÄ¿¹ØÁªµÄÖµ
+	WSTRFree(pWCHAR);//é‡Šæ”¾WCHARç±»å‹çš„æ•°æ®æº
+					 //è°ƒç”¨DLLå‡½æ•°ï¼Œæ ‡è®°å±æ€§æ˜¯ä¸OPCé¡¹ç›®å…³è”çš„å€¼
 	SetTagProperties(Handle, 100, Property, PropertyValue);
-	VariantClear(&PropertyValue);//Çå³ıPropertyValue
+	VariantClear(&PropertyValue);//æ¸…é™¤PropertyValue
 
 
-	//µ÷ÓÃDLL
+	//è°ƒç”¨DLL
 	SetItemLevelAlarm(Handle, ID_LOLO_LIMIT, Limits[0], Severity[0], Enabled[0]);
 	SetItemLevelAlarm(Handle, ID_LO_LIMIT, Limits[1], Severity[1], Enabled[1]);
 	SetItemLevelAlarm(Handle, ID_HI_LIMIT, Limits[2], Severity[2], Enabled[2]);
 	SetItemLevelAlarm(Handle, ID_HIHI_LIMIT, Limits[3], Severity[3], Enabled[3]);
 
-	//»ØÊÕ×ÊÔ´
+	//å›æ”¶èµ„æº
 	env->ReleaseStringUTFChars(name, Name);
 	env->ReleaseStringUTFChars(property, Property);
 	env->ReleaseStringUTFChars(property_value, Property_value);
 	env->ReleaseStringUTFChars(value, Value);
 	env->ReleaseStringUTFChars(value_type, Value_type);
 
-	printf("C++ÌáÊ¾£ºAllAddTag,HANDLE=%u\n", (UINT32)Handle);
-	return (UINT32)Handle;//·µ»ØÒÔÕûÊıµÄĞÎÊ½´«µİHANDLEÖ¸Õë
+	printf("C++æç¤ºï¼šAllAddTag,HANDLE=%u\n", (UINT32)Handle);
+	return (UINT32)Handle;//è¿”å›ä»¥æ•´æ•°çš„å½¢å¼ä¼ é€’HANDLEæŒ‡é’ˆ
 }
-//**********************ÕûÌå¸üĞÂTag*************************************//
+//**********************æ•´ä½“æ›´æ–°Tag*************************************//
 JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_AllUpdateTag(JNIEnv *env, jobject obj, jlong handle, jstring property, jstring property_value, jstring value, jstring value_type, jfloatArray limits, jlongArray severity, jbooleanArray enabled)
 {
-	//¸³ÖµProperty
+	//èµ‹å€¼Property
 	const char *Property = env->GetStringUTFChars(property, NULL);
-	//ÓÃÓÚÅĞ¶Ï¸üĞÂÊÇ·ñ³É¹¦
+	//ç”¨äºåˆ¤æ–­æ›´æ–°æ˜¯å¦æˆåŠŸ
 	BOOL jb1 = 0;
-	//¸³ÖµProperty_value
+	//èµ‹å€¼Property_value
 	const char *Property_value = env->GetStringUTFChars(property_value, NULL);
-	//¸³ÖµLimits
+	//èµ‹å€¼Limits
 	jfloat jlimits[4];
 	env->GetFloatArrayRegion(limits, 0, 4, jlimits);
 	float Limits[4];
@@ -700,7 +700,7 @@ JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_AllUpdateTag(JN
 	{
 		Limits[i] =(float)jlimits[i];
 	}
-	//¸³ÖµSeverity
+	//èµ‹å€¼Severity
 	jlong jseverity[4];
 	env->GetLongArrayRegion(severity, 0, 4, jseverity);
 	DWORD Severity[4];
@@ -708,7 +708,7 @@ JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_AllUpdateTag(JN
 	{
 		Severity[i] = (DWORD)jseverity[i];
 	}
-	//¸³ÖµEnabled
+	//èµ‹å€¼Enabled
 	jboolean jenabled[4];
 	env->SetBooleanArrayRegion(enabled, 0, 4, jenabled);
 	BOOL Enabled[4];
@@ -716,30 +716,30 @@ JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_AllUpdateTag(JN
 	{
 		Enabled[i] = (BOOL)jenabled[i];
 	}
-	//¸³ÖµHandle
+	//èµ‹å€¼Handle
 	HANDLE Handle = (HANDLE)handle;
-	//¸³ÖµValue£¬²¢×ª»¯ÎªVARIANT
+	//èµ‹å€¼Valueï¼Œå¹¶è½¬åŒ–ä¸ºVARIANT
 	const char *Value = env->GetStringUTFChars(value, NULL);
 	const char *Value_type = env->GetStringUTFChars(value_type, NULL);
 	VARIANT Vvalue;
-	VariantInit(&Vvalue);//³õÆÚ»¯ÎªVT_EMPTY
-	if (strcmp("VT_INT", Value_type) == 0)//ValueÀàĞÍÎªINT
+	VariantInit(&Vvalue);//åˆæœŸåŒ–ä¸ºVT_EMPTY
+	if (strcmp("VT_INT", Value_type) == 0)//Valueç±»å‹ä¸ºINT
 	{
 		string Svalue = Value;
 		int Ivalue = stoi(Svalue);
 		Vvalue.vt = VT_INT;
 		Vvalue.intVal = Ivalue;
 	}
-	else if (strcmp("VT_DOUBLE", Value_type) == 0)//ValueÀàĞÍÎªDOUBLE
+	else if (strcmp("VT_DOUBLE", Value_type) == 0)//Valueç±»å‹ä¸ºDOUBLE
 	{
 		string Svalue = Value;
 		double Dvalue = stod(Svalue);
 		Vvalue.vt = VT_R8;
 		Vvalue.dblVal = Dvalue;
 	}
-	else if (strcmp("VT_BOOLEAN", Value_type) == 0)//ValueÀàĞÍÎªBOOLEAN
+	else if (strcmp("VT_BOOLEAN", Value_type) == 0)//Valueç±»å‹ä¸ºBOOLEAN
 	{
-		if (strcmp("true", Value) == 0)//ÒòÎªjavaÖĞÊ¹ÓÃµÄÊÇtrue/false£¬´Ë´¦ÊÇÎªÁË¼æÈİ
+		if (strcmp("true", Value) == 0)//å› ä¸ºjavaä¸­ä½¿ç”¨çš„æ˜¯true/falseï¼Œæ­¤å¤„æ˜¯ä¸ºäº†å…¼å®¹
 		{
 			BOOL Bvalue = 1;
 			Vvalue.vt = VT_BOOL;
@@ -751,7 +751,7 @@ JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_AllUpdateTag(JN
 			Vvalue.vt = VT_BOOL;
 			Vvalue.boolVal = Bvalue;
 		}
-		else//Èç¹ûÊäÈëµÄ²»ÊÇtrue/falae
+		else//å¦‚æœè¾“å…¥çš„ä¸æ˜¯true/falae
 		{
 			string Svalue = Value;
 			BOOL Bvalue = stoi(Svalue);
@@ -759,47 +759,47 @@ JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_AllUpdateTag(JN
 			Vvalue.boolVal = Bvalue;
 		}
 	}
-	else if (strcmp("VT_STRING", Value_type) == 0)//ValueÀàĞÍÎªSTRING
+	else if (strcmp("VT_STRING", Value_type) == 0)//Valueç±»å‹ä¸ºSTRING
 	{
 		CString Cvalue = Value;
 		BSTR BSValue = Cvalue.AllocSysString();
 		Vvalue.vt = VT_BSTR;
 		Vvalue.bstrVal = BSValue;
 		jb1 = UpdateTag(Handle, Vvalue, OPC_QUALITY_GOOD);
-		VariantClear(&Vvalue);//Çå³ıVvlaue
-		SysFreeString(BSValue);//»ØÊÕ
+		VariantClear(&Vvalue);//æ¸…é™¤Vvlaue
+		SysFreeString(BSValue);//å›æ”¶
 	}
 	else
 	{
-		printf("C++ÌáÊ¾£ºÊı¾İÀàĞÍÊäÈë´íÎó£¬AllAddTagÊ§°Ü");
-		VariantClear(&Vvalue);//Çå³ıVvlaue
+		printf("C++æç¤ºï¼šæ•°æ®ç±»å‹è¾“å…¥é”™è¯¯ï¼ŒAllAddTagå¤±è´¥");
+		VariantClear(&Vvalue);//æ¸…é™¤Vvlaue
 		env->ReleaseStringUTFChars(property, Property);
 		env->ReleaseStringUTFChars(property_value, Property_value);
 		env->ReleaseStringUTFChars(value, Value);
 		env->ReleaseStringUTFChars(value_type, Value_type);
 		return (jboolean)0;
 	}
-	//µ÷ÓÃDLLÎÄ¼ş
-	if (strcmp("VT_STRING", Value_type) != 0)//ValueÀàĞÍ²»ÎªSTRING£¬ÎªÁË½â¾öSysFreeString(BSValue);µÄÎÊÌâ
+	//è°ƒç”¨DLLæ–‡ä»¶
+	if (strcmp("VT_STRING", Value_type) != 0)//Valueç±»å‹ä¸ä¸ºSTRINGï¼Œä¸ºäº†è§£å†³SysFreeString(BSValue);çš„é—®é¢˜
 	{
 		jb1 = UpdateTag(Handle, Vvalue, OPC_QUALITY_GOOD);
-		VariantClear(&Vvalue);//Çå³ıVvlaue
+		VariantClear(&Vvalue);//æ¸…é™¤Vvlaue
 	}
 
-	//ÉèÖÃÊôĞÔºÍÊôĞÔÖµ
+	//è®¾ç½®å±æ€§å’Œå±æ€§å€¼
 	VARIANT	PropertyValue;
-	VariantInit(&PropertyValue);//³õÆÚ»¯ÎªVT_EMPTY
-	PropertyValue.vt = VT_BSTR;//unsigned short£¬±íÊ¾Êı¾İÀàĞÍ
-	CString CProperty_value = Property_value;//const char*--¡·CString
-	WCHAR *pWCHAR = WSTRFromCString(CProperty_value);//CString¡ª¡ª¡·WCHAR
+	VariantInit(&PropertyValue);//åˆæœŸåŒ–ä¸ºVT_EMPTY
+	PropertyValue.vt = VT_BSTR;//unsigned shortï¼Œè¡¨ç¤ºæ•°æ®ç±»å‹
+	CString CProperty_value = Property_value;//const char*--ã€‹CString
+	WCHAR *pWCHAR = WSTRFromCString(CProperty_value);//CStringâ€”â€”ã€‹WCHAR
 	PropertyValue.bstrVal = SysAllocString(pWCHAR);
-	WSTRFree(pWCHAR);//ÊÍ·ÅWCHARÀàĞÍµÄÊı¾İÔ´
-					 //µ÷ÓÃDLLº¯Êı£¬±ê¼ÇÊôĞÔÊÇÓëOPCÏîÄ¿¹ØÁªµÄÖµ
+	WSTRFree(pWCHAR);//é‡Šæ”¾WCHARç±»å‹çš„æ•°æ®æº
+					 //è°ƒç”¨DLLå‡½æ•°ï¼Œæ ‡è®°å±æ€§æ˜¯ä¸OPCé¡¹ç›®å…³è”çš„å€¼
 	BOOL jb2 = SetTagProperties(Handle, 100, Property, PropertyValue);
-	VariantClear(&PropertyValue);//Çå³ıPropertyValue
+	VariantClear(&PropertyValue);//æ¸…é™¤PropertyValue
 
 
-	//µ÷ÓÃDLL
+	//è°ƒç”¨DLL
 	BOOL jb3 = SetItemLevelAlarm(Handle, ID_LOLO_LIMIT, Limits[0], Severity[0], Enabled[0]);
 	BOOL jb4 = SetItemLevelAlarm(Handle, ID_LO_LIMIT, Limits[1], Severity[1], Enabled[1]);
 	BOOL jb5 = SetItemLevelAlarm(Handle, ID_HI_LIMIT, Limits[2], Severity[2], Enabled[2]);
@@ -813,44 +813,44 @@ JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_AllUpdateTag(JN
 	if (jb1 + jb2 + jb3 + jb4 + jb5 + jb6 == 6) return (jboolean)1;
 	else return (jboolean)0;
 }
-//**********************¿ªÆôÅúÁ¿¸üĞÂTag**********************************//
+//**********************å¼€å¯æ‰¹é‡æ›´æ–°Tag**********************************//
 JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_StartUpdateTags(JNIEnv *env, jobject obj)
 {
-	//µ÷ÓÃDLL
+	//è°ƒç”¨DLL
 	BOOL bj = StartUpdateTags();
 
 	if (bj) return (jboolean)1;
 	else return (jboolean)0;
 }
-//***********************ÅúÁ¿¸üĞÂTag*************************************//
+//***********************æ‰¹é‡æ›´æ–°Tag*************************************//
 JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_UpdateTagToList(JNIEnv *env, jobject obj, jlong handle, jstring value, jstring value_type)
 {
-	//¸³ÖµHandle
+	//èµ‹å€¼Handle
 	HANDLE Handle = (HANDLE)handle;
-	//ÓÃÓÚÅĞ¶Ï¸üĞÂÊÇ·ñ³É¹¦
+	//ç”¨äºåˆ¤æ–­æ›´æ–°æ˜¯å¦æˆåŠŸ
 	BOOL bj = 0;
-	//¸³ÖµValue£¬²¢×ª»¯ÎªVARIANT
+	//èµ‹å€¼Valueï¼Œå¹¶è½¬åŒ–ä¸ºVARIANT
 	const char *Value = env->GetStringUTFChars(value, NULL);
 	const char *Value_type = env->GetStringUTFChars(value_type, NULL);
 	VARIANT Vvalue;
-	VariantInit(&Vvalue);//³õÆÚ»¯ÎªVT_EMPTY
-	if (strcmp("VT_INT", Value_type) == 0)//ValueÀàĞÍÎªINT
+	VariantInit(&Vvalue);//åˆæœŸåŒ–ä¸ºVT_EMPTY
+	if (strcmp("VT_INT", Value_type) == 0)//Valueç±»å‹ä¸ºINT
 	{
 		string Svalue = Value;
 		int Ivalue = stoi(Svalue);
 		Vvalue.vt = VT_INT;
 		Vvalue.intVal = Ivalue;
 	}
-	else if (strcmp("VT_DOUBLE", Value_type) == 0)//ValueÀàĞÍÎªDOUBLE
+	else if (strcmp("VT_DOUBLE", Value_type) == 0)//Valueç±»å‹ä¸ºDOUBLE
 	{
 		string Svalue = Value;
 		double Dvalue = stod(Svalue);
 		Vvalue.vt = VT_R8;
 		Vvalue.dblVal = Dvalue;
 	}
-	else if (strcmp("VT_BOOLEAN", Value_type) == 0)//ValueÀàĞÍÎªBOOLEAN
+	else if (strcmp("VT_BOOLEAN", Value_type) == 0)//Valueç±»å‹ä¸ºBOOLEAN
 	{
-		if (strcmp("true", Value) == 0)//ÒòÎªjavaÖĞÊ¹ÓÃµÄÊÇtrue/false£¬´Ë´¦ÊÇÎªÁË¼æÈİ
+		if (strcmp("true", Value) == 0)//å› ä¸ºjavaä¸­ä½¿ç”¨çš„æ˜¯true/falseï¼Œæ­¤å¤„æ˜¯ä¸ºäº†å…¼å®¹
 		{
 			BOOL Bvalue = 1;
 			Vvalue.vt = VT_BOOL;
@@ -862,7 +862,7 @@ JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_UpdateTagToList
 			Vvalue.vt = VT_BOOL;
 			Vvalue.boolVal = Bvalue;
 		}
-		else//Èç¹ûÊäÈëµÄ²»ÊÇtrue/falae
+		else//å¦‚æœè¾“å…¥çš„ä¸æ˜¯true/falae
 		{
 			string Svalue = Value;
 			BOOL Bvalue = stoi(Svalue);
@@ -870,29 +870,29 @@ JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_UpdateTagToList
 			Vvalue.boolVal = Bvalue;
 		}
 	}
-	else if (strcmp("VT_STRING", Value_type) == 0)//ValueÀàĞÍÎªSTRING
+	else if (strcmp("VT_STRING", Value_type) == 0)//Valueç±»å‹ä¸ºSTRING
 	{
 		CString Cvalue = Value;
 		BSTR BSValue = Cvalue.AllocSysString();
 		Vvalue.vt = VT_BSTR;
 		Vvalue.bstrVal = BSValue;
 		bj = UpdateTagToList(Handle, Vvalue, OPC_QUALITY_GOOD);
-		VariantClear(&Vvalue);//Çå³ıVvlaue
-		SysFreeString(BSValue);//»ØÊÕ
+		VariantClear(&Vvalue);//æ¸…é™¤Vvlaue
+		SysFreeString(BSValue);//å›æ”¶
 	}
 	else
 	{
-		printf("C++ÌáÊ¾£ºÊı¾İÀàĞÍÊäÈë´íÎó£¬UpdateTagÊ§°Ü");
-		VariantClear(&Vvalue);//Çå³ıVvlaue
+		printf("C++æç¤ºï¼šæ•°æ®ç±»å‹è¾“å…¥é”™è¯¯ï¼ŒUpdateTagå¤±è´¥");
+		VariantClear(&Vvalue);//æ¸…é™¤Vvlaue
 		env->ReleaseStringUTFChars(value, Value);
 		env->ReleaseStringUTFChars(value_type, Value_type);
 		return (jboolean)0;
 	}
-	//µ÷ÓÃDLLÎÄ¼ş
-	if (strcmp("VT_STRING", Value_type) != 0)//ValueÀàĞÍ²»ÎªSTRING£¬ÎªÁË½â¾öSysFreeString(BSValue);µÄÎÊÌâ
+	//è°ƒç”¨DLLæ–‡ä»¶
+	if (strcmp("VT_STRING", Value_type) != 0)//Valueç±»å‹ä¸ä¸ºSTRINGï¼Œä¸ºäº†è§£å†³SysFreeString(BSValue);çš„é—®é¢˜
 	{
 		bj = UpdateTagToList(Handle, Vvalue, OPC_QUALITY_GOOD);
-		VariantClear(&Vvalue);//Çå³ıVvlaue
+		VariantClear(&Vvalue);//æ¸…é™¤Vvlaue
 	}
 
 	env->ReleaseStringUTFChars(value, Value);
@@ -903,40 +903,40 @@ JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_UpdateTagToList
 	return  (jboolean)0;
 
 }
-//***********************¹Ø±ÕÅúÁ¿¸üĞÂTag*********************************//
+//***********************å…³é—­æ‰¹é‡æ›´æ–°Tag*********************************//
 JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_EndUpdateTags(JNIEnv *env, jobject obj)
 {
-	//µ÷ÓÃDLL
+	//è°ƒç”¨DLL
 	BOOL bj = EndUpdateTags();
 
 	if (bj) return (jboolean)1;
 	else return (jboolean)0;
 }
-//**********************ÉèÖÃTagµÄ±¨¾¯ÏŞÖµ********************************//
+//**********************è®¾ç½®Tagçš„æŠ¥è­¦é™å€¼********************************//
 JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_SetItemLevelAlarm(JNIEnv *env, jobject obj, jlong handle, jint levelid, jfloat limits, jlong severity, jboolean enabled)
 {
-	//¸³ÖµHandle
+	//èµ‹å€¼Handle
 	HANDLE Handle = (HANDLE)handle;
-	//¸³ÖµLevelID
+	//èµ‹å€¼LevelID
 	int LevelID = (int)levelid;
-	//¸³ÖµLimits
+	//èµ‹å€¼Limits
 	float Limits = (float)limits;
-	//¸³ÖµSeverity 
+	//èµ‹å€¼Severity 
 	DWORD Severity = (DWORD)severity;
-	//¸³ÖµEnabled
+	//èµ‹å€¼Enabled
 	BOOL Enabled = (BOOL)enabled;
-	//µ÷ÓÃDLL
+	//è°ƒç”¨DLL
 	BOOL bj = SetItemLevelAlarm(Handle, LevelID, Limits, Severity, Enabled);
 
 	if (bj) return (jboolean)1;
 	else return (jboolean)0;
 }
-//*********************¶ÁÈ¡tagµÄ±¨¾¯ÏŞÖµ*********************************//
+//*********************è¯»å–tagçš„æŠ¥è­¦é™å€¼*********************************//
 JNIEXPORT jstring JNICALL Java_com_st_opcserver_dll_STOPCServer_GetItemLevelAlarm(JNIEnv *env, jobject obj, jlong handle, jint levelid)
 {
-	//¸³ÖµHandle
+	//èµ‹å€¼Handle
 	HANDLE Handle = (HANDLE)handle;
-	//¸³ÖµLevelID
+	//èµ‹å€¼LevelID
 	int LevelID = (int)levelid;
 
 	float Limits = 0;
@@ -945,7 +945,7 @@ JNIEXPORT jstring JNICALL Java_com_st_opcserver_dll_STOPCServer_GetItemLevelAlar
 	BOOL bj = GetItemLevelAlarm(Handle, LevelID, &Limits, &Severity, &Enabled);
 	if (bj)
 	{
-		string point = "*";//ÓÃÀ´¸ô¿ªÃ¿¸öÊı¾İ£¬·½±ãÔÚjavaÖĞ·Ö¿ª
+		string point = "*";//ç”¨æ¥éš”å¼€æ¯ä¸ªæ•°æ®ï¼Œæ–¹ä¾¿åœ¨javaä¸­åˆ†å¼€
 		string SLimits = to_string(Limits);
 		string SSeverity = to_string(Severity);
 		string SEnabled = to_string(Enabled);
@@ -954,21 +954,21 @@ JNIEXPORT jstring JNICALL Java_com_st_opcserver_dll_STOPCServer_GetItemLevelAlar
 		jstring jsend = env->NewStringUTF(Csend);
 		return jsend;
 	}
-	else//Èç¹û¶ÁÈ¡Ê§°Ü£¬·µ»Ønull
+	else//å¦‚æœè¯»å–å¤±è´¥ï¼Œè¿”å›null
 	{
 		const char *Csend = "null";
 		jstring jsend = env->NewStringUTF(Csend);
 		return jsend;
 	}
 }
-//*********************¿ªÆô»ò¹Ø±Õtag¶Ô¿Í»§¶ËµÄ¸üĞÂ********************//
+//*********************å¼€å¯æˆ–å…³é—­tagå¯¹å®¢æˆ·ç«¯çš„æ›´æ–°********************//
 JNIEXPORT jboolean JNICALL Java_com_st_opcserver_dll_STOPCServer_SuspendTagUpdates(JNIEnv *env, jobject obj, jlong handle, jboolean onoff)
 {
-	//¸³ÖµHandle
+	//èµ‹å€¼Handle
 	HANDLE Handle = (HANDLE)handle;
-	//¸³ÖµOnOff
+	//èµ‹å€¼OnOff
 	BOOL OnOff = (BOOL)onoff;
-	//µ÷ÓÃDLL
+	//è°ƒç”¨DLL
 	BOOL bj = SuspendTagUpdates(Handle, OnOff);
 
 	if (bj) return (jboolean)1;
