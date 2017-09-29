@@ -3,21 +3,21 @@ package com.st.opcserver.tags;
 
 public class STTags {
 
-	private String name;      						//TagµÄÃû×Ö
-	private Long handle;							//TagÔÚ·şÎñÆ÷ÖĞµÄ¾ä±ú
-	private String property;						//TagµÄÊôĞÔ
-	private String property_value;					//TagµÄÊôĞÔÖµ
-	private String value;							//TagµÄÊıÖµ£¬ÓÃString±íÊ¾£¬ÔÚDLLÖĞÒÑ¾­×öÁËÊı¾İÀàĞÍ×ª»»
-	private String value_type;						//TagµÄÊı¾İÀàĞÍ£¬VT_INT£¬VT_DOUBLE£¬VT_BOOLEAN£¬VT_STRING
-	private Boolean iswritable;					//TagÊÇ·ñ¿ÉĞ´
-	private Long readaccesslevel;					//TagµÄ·ÃÎÊµÈ¼¶
-	private Long writeaccesslevel;					//TagµÄĞ´ÈëµÈ¼¶
-	private float[] limits = new float[4];		//TagµÄ±¨¾¯ÏŞÖµ
-	private long[] severity = new long[4];		//TagµÄ±¨¾¯ÑÏÖØ³Ì¶È
-	private boolean[] enabled = new boolean[4];	//TagµÄ¸Ã¼¶±ğµÄ±¨¾¯ÊÇ·ñ¿ªÆô
+	private String name;      						//Tagçš„åå­—
+	private Long handle;							//Tagåœ¨æœåŠ¡å™¨ä¸­çš„å¥æŸ„
+	private String property;						//Tagçš„å±æ€§
+	private String property_value;					//Tagçš„å±æ€§å€¼
+	private String value;							//Tagçš„æ•°å€¼ï¼Œç”¨Stringè¡¨ç¤ºï¼Œåœ¨DLLä¸­å·²ç»åšäº†æ•°æ®ç±»å‹è½¬æ¢
+	private String value_type;						//Tagçš„æ•°æ®ç±»å‹ï¼ŒVT_INTï¼ŒVT_DOUBLEï¼ŒVT_BOOLEANï¼ŒVT_STRING
+	private Boolean iswritable;					//Tagæ˜¯å¦å¯å†™
+	private Long readaccesslevel;					//Tagçš„è®¿é—®ç­‰çº§
+	private Long writeaccesslevel;					//Tagçš„å†™å…¥ç­‰çº§
+	private float[] limits = new float[4];		//Tagçš„æŠ¥è­¦é™å€¼
+	private long[] severity = new long[4];		//Tagçš„æŠ¥è­¦ä¸¥é‡ç¨‹åº¦
+	private boolean[] enabled = new boolean[4];	//Tagçš„è¯¥çº§åˆ«çš„æŠ¥è­¦æ˜¯å¦å¼€å¯
 	
 	/**
-	 * ÎŞ²ÎÊı¹¹Ôìº¯Êı£¬Ä¬ÈÏÉèÖÃËùÓĞÊı¾İÎªnullºÍ0
+	 * æ— å‚æ•°æ„é€ å‡½æ•°ï¼Œé»˜è®¤è®¾ç½®æ‰€æœ‰æ•°æ®ä¸ºnullå’Œ0
 	 */
 	public STTags(){
 		this.name = "null";
@@ -32,20 +32,20 @@ public class STTags {
 	}
 
 	/**
-	 * ÓĞ²ÎÊı¹¹Ôìº¯Êı£¬½«ËùÓĞµÄ²ÎÊı¸ù¾İÊäÈëµÄ²ÎÊı³õÊ¼»¯Ò»±à
+	 * æœ‰å‚æ•°æ„é€ å‡½æ•°ï¼Œå°†æ‰€æœ‰çš„å‚æ•°æ ¹æ®è¾“å…¥çš„å‚æ•°åˆå§‹åŒ–ä¸€ç¼–
 	 * 
-	 * @param name TagµÄÃû×Ö
-	 * @param handle TagÔÚ·şÎñÆ÷ÖĞµÄ¾ä±ú
-	 * @param property TagµÄÊôĞÔ
-	 * @param property_value TagµÄÊôĞÔÖµ
-	 * @param value TagµÄÊı¾İ£¬ÓÃString±íÊ¾£¬ÔÚDLLÖĞÒÑ¾­×öÁËÊı¾İÀàĞÍ×ª»»
-	 * @param value_type  TagµÄÊı¾İÀàĞÍ£¬VT_INT£¬VT_DOUBLE£¬VT_BOOLEAN£¬VT_STRING
-	 * @param iswritable TagÊÇ·ñ¿ÉĞ´
-	 * @param readaccesslevel TagµÄ·ÃÎÊµÈ¼¶
-	 * @param writeaccesslevel TagµÄĞ´ÈëµÈ¼¶
-	 * @param limits TagµÄ±¨¾¯ÏŞÖµ
-	 * @param severity TagµÄ±¨¾¯ÑÏÖØ³Ì¶È
-	 * @param enabled TagµÄ¸Ã¼¶±ğµÄ±¨¾¯ÊÇ·ñ¿ªÆô
+	 * @param name Tagçš„åå­—
+	 * @param handle Tagåœ¨æœåŠ¡å™¨ä¸­çš„å¥æŸ„
+	 * @param property Tagçš„å±æ€§
+	 * @param property_value Tagçš„å±æ€§å€¼
+	 * @param value Tagçš„æ•°æ®ï¼Œç”¨Stringè¡¨ç¤ºï¼Œåœ¨DLLä¸­å·²ç»åšäº†æ•°æ®ç±»å‹è½¬æ¢
+	 * @param value_type  Tagçš„æ•°æ®ç±»å‹ï¼ŒVT_INTï¼ŒVT_DOUBLEï¼ŒVT_BOOLEANï¼ŒVT_STRING
+	 * @param iswritable Tagæ˜¯å¦å¯å†™
+	 * @param readaccesslevel Tagçš„è®¿é—®ç­‰çº§
+	 * @param writeaccesslevel Tagçš„å†™å…¥ç­‰çº§
+	 * @param limits Tagçš„æŠ¥è­¦é™å€¼
+	 * @param severity Tagçš„æŠ¥è­¦ä¸¥é‡ç¨‹åº¦
+	 * @param enabled Tagçš„è¯¥çº§åˆ«çš„æŠ¥è­¦æ˜¯å¦å¼€å¯
 	 */
 	public STTags(String name, Long handle, String property, String property_value, String value, String value_type,boolean iswritable,
 			Long readaccesslevel, Long writeaccesslevel, float[] limits, long[] severity, boolean[] enabled) {
@@ -65,216 +65,216 @@ public class STTags {
 	}
 
 	/**
-	 * »ñÈ¡TagµÄÃû×Ö
+	 * è·å–Tagçš„åå­—
 	 * 
-	 * @return TagµÄÃû×Ö
+	 * @return Tagçš„åå­—
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * ÉèÖÃTagµÄÃû×Ö
+	 * è®¾ç½®Tagçš„åå­—
 	 * 
-	 * @param name TagµÄÃû×Ö
+	 * @param name Tagçš„åå­—
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * »ñÈ¡TagÔÚ·şÎñÆ÷ÖĞµÄ¾ä±ú
+	 * è·å–Tagåœ¨æœåŠ¡å™¨ä¸­çš„å¥æŸ„
 	 *  
-	 * @return TagÔÚ·şÎñÆ÷ÖĞµÄ¾ä±ú
+	 * @return Tagåœ¨æœåŠ¡å™¨ä¸­çš„å¥æŸ„
 	 */
 	public Long getHandle() {
 		return handle;
 	}
 
 	/**
-	 * ÉèÖÃTagÔÚ·şÎñÆ÷ÖĞµÄ¾ä±ú
+	 * è®¾ç½®Tagåœ¨æœåŠ¡å™¨ä¸­çš„å¥æŸ„
 	 * 
-	 * @param handle TagÔÚ·şÎñÆ÷ÖĞµÄ¾ä±ú
+	 * @param handle Tagåœ¨æœåŠ¡å™¨ä¸­çš„å¥æŸ„
 	 */
 	public void setHandle(Long handle) {
 		this.handle = handle;
 	}
 
 	/**
-	 * »ñÈ¡TagµÄÊôĞÔ
+	 * è·å–Tagçš„å±æ€§
 	 * 
-	 * @return TagµÄÊôĞÔ
+	 * @return Tagçš„å±æ€§
 	 */
 	public String getProperty() {
 		return property;
 	}
 
 	/**
-	 * ÉèÖÃTagµÄÊôĞÔ
+	 * è®¾ç½®Tagçš„å±æ€§
 	 * 
-	 * @param property TagµÄÊôĞÔ
+	 * @param property Tagçš„å±æ€§
 	 */
 	public void setProperty(String property) {
 		this.property = property;
 	}
 
 	/**
-	 * »ñÈ¡TagµÄÊôĞÔÖµ
+	 * è·å–Tagçš„å±æ€§å€¼
 	 * 
-	 * @return TagµÄÊôĞÔÖµ
+	 * @return Tagçš„å±æ€§å€¼
 	 */
 	public String getProperty_value() {
 		return property_value;
 	}
 
 	/**
-	 * ÉèÖÃTagµÄÊôĞÔÖµ
+	 * è®¾ç½®Tagçš„å±æ€§å€¼
 	 * 
-	 * @param property_value TagµÄÊôĞÔÖµ
+	 * @param property_value Tagçš„å±æ€§å€¼
 	 */
 	public void setProperty_value(String property_value) {
 		this.property_value = property_value;
 	}
 
 	/**
-	 * »ñÈ¡TagµÄÊıÖµ
+	 * è·å–Tagçš„æ•°å€¼
 	 * 
-	 * @return TagµÄÊıÖµ£¬ÓÃString±íÊ¾£¬ÔÚDLLÖĞÒÑ¾­×öÁËÊı¾İÀàĞÍ×ª»»
+	 * @return Tagçš„æ•°å€¼ï¼Œç”¨Stringè¡¨ç¤ºï¼Œåœ¨DLLä¸­å·²ç»åšäº†æ•°æ®ç±»å‹è½¬æ¢
 	 */
 	public String getValue() {
 		return value;
 	}
 
 	/**
-	 * ÉèÖÃTagµÄÊıÖµ
+	 * è®¾ç½®Tagçš„æ•°å€¼
 	 * 
-	 * @param value TagµÄÊıÖµ£¬ÓÃString±íÊ¾£¬ÔÚDLLÖĞÒÑ¾­×öÁËÊı¾İÀàĞÍ×ª»»
+	 * @param value Tagçš„æ•°å€¼ï¼Œç”¨Stringè¡¨ç¤ºï¼Œåœ¨DLLä¸­å·²ç»åšäº†æ•°æ®ç±»å‹è½¬æ¢
 	 */
 	public void setValue(String value) {
 		this.value = value;
 	}
 
 	/**
-	 * »ñÈ¡TagµÄÊı¾İÀàĞÍ
+	 * è·å–Tagçš„æ•°æ®ç±»å‹
 	 * 
-	 * @return TagµÄÊı¾İÀàĞÍ£¬°üÀ¨VT_INT£¬VT_DOUBLE£¬VT_BOOLEAN£¬VT_STRING
+	 * @return Tagçš„æ•°æ®ç±»å‹ï¼ŒåŒ…æ‹¬VT_INTï¼ŒVT_DOUBLEï¼ŒVT_BOOLEANï¼ŒVT_STRING
 	 */
 	public String getValue_type() {
 		return value_type;
 	}
 
 	/**
-	 * ÉèÖÃTagµÄÊı¾İÀàĞÍ
+	 * è®¾ç½®Tagçš„æ•°æ®ç±»å‹
 	 * 
-	 * @param value_type TagµÄÊı¾İÀàĞÍ£¬°üÀ¨VT_INT£¬VT_DOUBLE£¬VT_BOOLEAN£¬VT_STRING
+	 * @param value_type Tagçš„æ•°æ®ç±»å‹ï¼ŒåŒ…æ‹¬VT_INTï¼ŒVT_DOUBLEï¼ŒVT_BOOLEANï¼ŒVT_STRING
 	 */
 	public void setValue_type(String value_type) {
 		this.value_type = value_type;
 	}
 
 	/**
-	 * »ñÈ¡TagÊÇ·ñ¿ÉĞ´
+	 * è·å–Tagæ˜¯å¦å¯å†™
 	 * 
-	 * @return TagÊÇ·ñ¿ÉĞ´
+	 * @return Tagæ˜¯å¦å¯å†™
 	 */
 	public Boolean getIswritable() {
 		return iswritable;
 	}
 
 	/**
-	 * ÉèÖÃTagÊÇ·ñ¿ÉĞ´
+	 * è®¾ç½®Tagæ˜¯å¦å¯å†™
 	 * 
-	 * @param iswritable TagÊÇ·ñ¿ÉĞ´
+	 * @param iswritable Tagæ˜¯å¦å¯å†™
 	 */
 	public void setIswritable(Boolean iswritable) {
 		this.iswritable = iswritable;
 	}
 
 	/**
-	 * »ñÈ¡TagµÄ·ÃÎÊµÈ¼¶
+	 * è·å–Tagçš„è®¿é—®ç­‰çº§
 	 * 
-	 * @return TagµÄ·ÃÎÊµÈ¼¶
+	 * @return Tagçš„è®¿é—®ç­‰çº§
 	 */
 	public Long getReadaccesslevel() {
 		return readaccesslevel;
 	}
 
 	/**
-	 * ÉèÖÃTagµÄ·ÃÎÊµÈ¼¶
+	 * è®¾ç½®Tagçš„è®¿é—®ç­‰çº§
 	 * 
-	 * @param readaccesslevel TagµÄ·ÃÎÊµÈ¼¶
+	 * @param readaccesslevel Tagçš„è®¿é—®ç­‰çº§
 	 */
 	public void setReadaccesslevel(Long readaccesslevel) {
 		this.readaccesslevel = readaccesslevel;
 	}
 
 	/**
-	 * »ñÈ¡TagµÄĞ´ÈëµÈ¼¶
+	 * è·å–Tagçš„å†™å…¥ç­‰çº§
 	 * 
-	 * @return TagµÄĞ´ÈëµÈ¼¶
+	 * @return Tagçš„å†™å…¥ç­‰çº§
 	 */
 	public Long getWriteaccesslevel() {
 		return writeaccesslevel;
 	}
 
 	/**
-	 * ÉèÖÃTagµÄĞ´ÈëµÈ¼¶
+	 * è®¾ç½®Tagçš„å†™å…¥ç­‰çº§
 	 * 
-	 * @param writeaccesslevel TagµÄĞ´ÈëµÈ¼¶
+	 * @param writeaccesslevel Tagçš„å†™å…¥ç­‰çº§
 	 */
 	public void setWriteaccesslevel(Long writeaccesslevel) {
 		this.writeaccesslevel = writeaccesslevel;
 	}
 
 	/**
-	 * »ñÈ¡TagµÄ±¨¾¯ÏŞÖµ
+	 * è·å–Tagçš„æŠ¥è­¦é™å€¼
 	 * 
-	 * @return TagµÄ±¨¾¯ÏŞÖµ
+	 * @return Tagçš„æŠ¥è­¦é™å€¼
 	 */
 	public float[] getLimits() {
 		return limits;
 	}
 
 	/**
-	 * ÉèÖÃTagµÄ±¨¾¯ÏŞÖµ
+	 * è®¾ç½®Tagçš„æŠ¥è­¦é™å€¼
 	 * 
-	 * @param limits TagµÄ±¨¾¯ÏŞÖµ
+	 * @param limits Tagçš„æŠ¥è­¦é™å€¼
 	 */
 	public void setLimits(float[] limits) {
 		this.limits = limits;
 	}
 
 	/**
-	 * »ñÈ¡TagµÄ±¨¾¯ÑÏÖØ³Ì¶È
+	 * è·å–Tagçš„æŠ¥è­¦ä¸¥é‡ç¨‹åº¦
 	 * 
-	 * @return TagµÄ±¨¾¯ÑÏÖØ³Ì¶È
+	 * @return Tagçš„æŠ¥è­¦ä¸¥é‡ç¨‹åº¦
 	 */
 	public long[] getSeverity() {
 		return severity;
 	}
 
 	/**
-	 * ÉèÖÃTagµÄ±¨¾¯ÑÏÖØ³Ì¶È
+	 * è®¾ç½®Tagçš„æŠ¥è­¦ä¸¥é‡ç¨‹åº¦
 	 * 
-	 * @param severity TagµÄ±¨¾¯ÑÏÖØ³Ì¶È
+	 * @param severity Tagçš„æŠ¥è­¦ä¸¥é‡ç¨‹åº¦
 	 */
 	public void setSeverity(long[] severity) {
 		this.severity = severity;
 	}
 
 	/**
-	 * »ñÈ¡TagµÄ¸Ã¼¶±ğµÄ±¨¾¯ÊÇ·ñ¿ªÆô
+	 * è·å–Tagçš„è¯¥çº§åˆ«çš„æŠ¥è­¦æ˜¯å¦å¼€å¯
 	 * 
-	 * @return TagµÄ¸Ã¼¶±ğµÄ±¨¾¯ÊÇ·ñ¿ªÆô
+	 * @return Tagçš„è¯¥çº§åˆ«çš„æŠ¥è­¦æ˜¯å¦å¼€å¯
 	 */
 	public boolean[] getEnabled() {
 		return enabled;
 	}
 
 	/**
-	 * ÉèÖÃTagµÄ¸Ã¼¶±ğµÄ±¨¾¯ÊÇ·ñ¿ªÆô
+	 * è®¾ç½®Tagçš„è¯¥çº§åˆ«çš„æŠ¥è­¦æ˜¯å¦å¼€å¯
 	 * 
-	 * @param enabled TagµÄ¸Ã¼¶±ğµÄ±¨¾¯ÊÇ·ñ¿ªÆô
+	 * @param enabled Tagçš„è¯¥çº§åˆ«çš„æŠ¥è­¦æ˜¯å¦å¼€å¯
 	 */
 	public void setEnabled(boolean[] enabled) {
 		this.enabled = enabled;
