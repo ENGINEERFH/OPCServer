@@ -151,7 +151,7 @@
    参数字段|类型|限制|说明
    :----|:-----:|-----:|-----:
    handle|longint|无|Tag的句柄
-   levelid|int|无|分为4个等级 ID_LOLO_LIMIT = 1；ID_LO_LIMIT = 2；ID_HI_LIMIT = 3；ID_HIHI_LIMIT = 4；
+   levelid|int|分为4个等级 ID_LOLO_LIMIT = 1；ID_LO_LIMIT = 2；ID_HI_LIMIT = 3；ID_HIHI_LIMIT = 4|等级
    limits|float|无|Tag的报警限值
    severity|long|无|Tag的报警严重程度
    enabled|boolean|无|Tag的该级别的报警是否开启
@@ -205,7 +205,7 @@
    参数字段|类型|限制|说明
    :----|:-----:|-----:|-----:
    name|String|无|Tag的名字
-   value|String|无|Tag的数值，用String表示，在DLL中已经做了数据类型转换
+   value|String|用String表示，在DLL中已经做了数据类型转换|Tag的数值
    value_type|String|VT_INT，VT_DOUBLE，VT_BOOLEAN，VT_STRING|Tag的数据类型
    iswritable|Boolean|无|Tag是否可写
 
@@ -224,7 +224,7 @@
    参数字段|类型|限制|说明
    :----|:-----:|-----:|-----:
    handle|Long|无|Tag在服务器中的句柄
-   value|String|无|Tag的数值，用String表示，在DLL中已经做了数据类型转换
+   value|String|用String表示，在DLL中已经做了数据类型转换|Tag的数值
    value_type|String|VT_INT，VT_DOUBLE，VT_BOOLEAN，VT_STRING|Tag的数据类型
 
   - ## 返回参数说明
@@ -242,7 +242,7 @@
    参数字段|类型|限制|说明
    :----|:-----:|-----:|-----:
    name|String|无|Tag的名字
-   value|String|无|Tag的数值，用String表示，在DLL中已经做了数据类型转换
+   value|String|用String表示，在DLL中已经做了数据类型转换|Tag的数值
    value_type|String|VT_INT，VT_DOUBLE，VT_BOOLEAN，VT_STRING|Tag的数据类型
 
   - ## 返回参数说明
@@ -279,7 +279,7 @@
    name|String|无|Tag的名字
    property|String|无|Tag的属性
    property_value|String|无|Tag的属性值
-   value|String|无|Tag的数值，用String表示，在DLL中已经做了数据类型转换
+   value|String|用String表示，在DLL中已经做了数据类型转换|Tag的数值
    value_type|String|VT_INT，VT_DOUBLE，VT_BOOLEAN，VT_STRING|Tag的数据类型
    iswritable|Boolean|无|Tag是否可写
    readaccesslevel|Long|无|Tag的访问等级
@@ -305,7 +305,7 @@
    handle|Long|无|Tag在服务器中的句柄
    property|String|无|Tag的属性
    property_value|String|无|Tag的属性值
-   value|String|无|Tag的数值，用String表示，在DLL中已经做了数据类型转换
+   value|String|用String表示，在DLL中已经做了数据类型转换|Tag的数值
    value_type|String|VT_INT，VT_DOUBLE，VT_BOOLEAN，VT_STRING|Tag的数据类型
    iswritable|Boolean|无|Tag是否可写
    readaccesslevel|Long|无|Tag的访问等级
@@ -358,7 +358,7 @@
    参数字段|类型|限制|说明
    :----|:-----:|-----:|-----:
    handle|Long|无|Tag在服务器中的句柄
-   value|String|无|Tag的数值，用String表示，在DLL中已经做了数据类型转换
+   value|String|用String表示，在DLL中已经做了数据类型转换|Tag的数值
    value_type|String|VT_INT，VT_DOUBLE，VT_BOOLEAN，VT_STRING|Tag的数据类型
 
   - ## 返回参数说明
